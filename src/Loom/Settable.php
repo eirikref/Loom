@@ -43,7 +43,7 @@ class Settable
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-20
      * @access public
-     * @return object $this
+     * @return boolean True if able to set, false if not
      *
      * @param  string $key   The variable name
      * @param  mixed  $value The value
@@ -51,6 +51,9 @@ class Settable
      */
     public function set($key, $value, $type = null)
     {
+        $this->data[$key] = $value;
+
+        return true;
     }
 
 
@@ -68,6 +71,9 @@ class Settable
      */
     public function get($key, $type = null)
     {
+        if (isset($this->data[$key])) {
+            return $this->data[$key];
+        }
     }
 
 

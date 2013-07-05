@@ -1,0 +1,51 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "156ad81963087485a642239b34a6a4ff",
+    "packages": [
+        {
+            "name": "eirikref/Fiber",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eirikref/Fiber.git",
+                "reference": "92b66ec2b857a7795d6ceda42153a6640ae5658c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eirikref/Fiber/zipball/92b66ec2b857a7795d6ceda42153a6640ae5658c",
+                "reference": "92b66ec2b857a7795d6ceda42153a6640ae5658c",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Fiber\\": "src/"
+                }
+            },
+            "support": {
+                "source": "https://github.com/eirikref/Fiber/tree/master",
+                "issues": "https://github.com/eirikref/Fiber/issues"
+            },
+            "time": "2013-06-29 09:35:36"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "eirikref/fiber": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

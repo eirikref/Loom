@@ -2,7 +2,7 @@
          bootstrap="phpunit-bootstrap.php">
   <testsuites>
     <testsuite name="Loom">
-      <directory>tests/</directory>
+      <directory>tests/phpunit/</directory>
     </testsuite>
   </testsuites>
 </phpunit>
