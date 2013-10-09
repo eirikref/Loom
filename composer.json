@@ -26,10 +26,19 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/eirikref/fiber"
+            "url": "https://github.com/eirikref/Fiber"
         }
     ],
     "require": {
-        "eirikref/fiber": "dev-master"
+        "psr/log": "*",
+        "eirikref/Fiber": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "squizlabs/php_codesniffer": "1.*",
+        "phpmd/phpmd": "1.4.*",
+        "phploc/phploc": "*",
+        "phpmd/phpmd": "dev-master",
+        "phpdocumentor/phpdocumentor": "*"
     }
 }
