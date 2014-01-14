@@ -51,8 +51,15 @@ class Settable
      */
     public function set($key, $value, $type = null)
     {
-        $this->data[$key] = $value;
+        if (!is_string($key) || strlen($key) < 1) {
+            return false;
+        }
 
+        if (!is_null($type) && false === $this->checkType($value, $type)) {
+            return false;
+        }
+
+        $this->data[$key] = $value;
         return true;
     }
 
@@ -125,6 +132,10 @@ class Settable
     private function checkType($value, $type)
     {
         $isValid = false;
+
+        if (!is_string($type)) {
+            return false;
+        }
 
         switch ($type) {
         case 'string':
