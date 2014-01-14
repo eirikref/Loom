@@ -1,8 +1,19 @@
 <phpunit colors="true"
-         bootstrap="phpunit-bootstrap.php">
+         bootstrap="phpunit-bootstrap.php"
+         verbose="true">
   <testsuites>
-    <testsuite name="Loom">
-      <directory>tests/phpunit/</directory>
+    <testsuite name="Loom Unit Tests">
+      <directory>tests/unit/</directory>
+    </testsuite>
+    <testsuite name="Loom System Tests">
+      <directory>tests/system/</directory>
     </testsuite>
   </testsuites>
+
+  <filter>
+    <whitelist>
+      <directory suffix=".php">src/</directory>
+    </whitelist>
+  </filter>
+
 </phpunit>
