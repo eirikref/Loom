@@ -38,7 +38,6 @@
         "squizlabs/php_codesniffer": "1.*",
         "phpmd/phpmd": "1.4.*",
         "phploc/phploc": "*",
-        "phpmd/phpmd": "dev-master",
         "phpdocumentor/phpdocumentor": "*"
     }
 }
