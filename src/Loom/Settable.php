@@ -40,6 +40,12 @@ class Settable
     /**
      * Set a value
      *
+     * 1. Must support multi-level keys
+     * 2. Loop through key parts, if they don't exist, create empty array()
+     * 3. If on last key part, set value
+     * 4. If actual key exists, replace it
+     * 5. If non-array key exists and trying to set sub-key, convert to array?
+     *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-20
      * @access public
@@ -59,7 +65,23 @@ class Settable
             return false;
         }
 
-        $this->data[$key] = $value;
+        $keys    =  explode($this->delimeter, $key);
+        $numKeys =  count($keys);
+        $ptr     =& $this->data;
+
+        for ($i = 0; $i < $numKeys; ++$i) {
+            $key    = $keys[$i];
+            $lastEl = ($i == $numKeys - 1) ? true : false;
+
+            if (!$lastEl && !isset($ptr[$key])) {
+                $ptr[$key] = array();
+            } elseif ($lastEl) {
+                $ptr[$key] = $value;
+            }
+            
+            $ptr =& $ptr[$key];
+        }
+
         return true;
     }
 
