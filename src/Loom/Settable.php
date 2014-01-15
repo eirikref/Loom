@@ -71,12 +71,16 @@ class Settable
 
         for ($i = 0; $i < $numKeys; ++$i) {
             $key    = $keys[$i];
-            $lastEl = ($i == $numKeys - 1) ? true : false;
+            $lastEl = ($i == ($numKeys - 1)) ? true : false;
 
-            if (!$lastEl && !isset($ptr[$key])) {
-                $ptr[$key] = array();
-            } elseif ($lastEl) {
+            if (true === $lastEl) {
                 $ptr[$key] = $value;
+            } else {
+                if (isset($ptr[$key])) {
+                    // Ignore for now
+                } else {
+                    $ptr[$key] = array();
+                }
             }
             
             $ptr =& $ptr[$key];
