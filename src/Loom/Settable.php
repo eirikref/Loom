@@ -65,6 +65,11 @@ class Settable
             return false;
         }
 
+        if (!strstr($value, $this->delimiter)) {
+            $this->data[$key] = $value;
+            return true;
+        }
+
         $keys    =  explode($this->delimeter, $key);
         $numKeys =  count($keys);
         $ptr     =& $this->data;
