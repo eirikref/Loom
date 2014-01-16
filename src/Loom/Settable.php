@@ -65,7 +65,7 @@ class Settable
             return false;
         }
 
-        if (!strstr($value, $this->delimiter)) {
+        if (!strstr($key, $this->delimiter)) {
             $this->data[$key] = $value;
             return true;
         }
