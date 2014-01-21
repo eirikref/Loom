@@ -1,7 +1,7 @@
 <?php
 /**
  * Loom: Settable
- * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
+ * Copyright (c) 2013-2014 Eirik Refsdal <eirikref@gmail.com>
  */
 
 namespace Loom;
@@ -13,7 +13,7 @@ namespace Loom;
  * variables with type-checking.
  *
  * @package Loom
- * @version 2013-06-20
+ * @version 2014-01-21
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class Settable
@@ -144,6 +144,9 @@ class Settable
      */
     public function setDelimiter($delimiter)
     {
+        if (is_string($delimiter) && 1 == strlen($delimiter)) {
+            $this->delimiter = $delimiter;
+        }
     }
 
 
