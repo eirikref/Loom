@@ -35,6 +35,14 @@ class Settable
      */
     private $delimiter = ".";
 
+    /**
+     * Max key length
+     *
+     * @var    integer $maxlength
+     * @access private
+     */
+    private $maxlength = 128;
+
 
 
     /**
@@ -57,7 +65,7 @@ class Settable
      */
     public function set($key, $value, $type = null)
     {
-        if (!is_string($key) || strlen($key) < 1) {
+        if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxlength) {
             return false;
         }
 
@@ -109,6 +117,12 @@ class Settable
      */
     public function get($key, $type = null)
     {
+        if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxlength) {
+            return false;
+        }
+
+        // TODO: Add multi-level support
+
         if (isset($this->data[$key])) {
             return $this->data[$key];
         }
