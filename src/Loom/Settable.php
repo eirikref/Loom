@@ -38,10 +38,10 @@ class Settable
     /**
      * Max key length
      *
-     * @var    integer $maxlength
+     * @var    integer $maxKeyLength
      * @access private
      */
-    private $maxlength = 128;
+    private $maxKeyLength = 128;
 
 
 
@@ -65,7 +65,7 @@ class Settable
      */
     public function set($key, $value, $type = null)
     {
-        if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxlength) {
+        if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxKeyLength) {
             return false;
         }
 
@@ -117,7 +117,7 @@ class Settable
      */
     public function get($key, $type = null)
     {
-        if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxlength) {
+        if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxKeyLength) {
             return false;
         }
 
