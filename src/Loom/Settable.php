@@ -121,10 +121,22 @@ class Settable
             return false;
         }
 
-        // TODO: Add multi-level support
+        $return = null;
 
-        if (isset($this->data[$key])) {
-            return $this->data[$key];
+        if (!strstr($key, $this->delimiter)) {
+            if (isset($this->data[$key])) {
+                $return = $this->data[$key];
+            } else {
+                return null;
+            }
+        } else {
+            // TODO: Implement key multi-level checking here
+        }
+
+        if (is_null($type) || $this->checkType($key, $type)) {
+            return $return;
+        } else {
+            return null;
         }
     }
 
