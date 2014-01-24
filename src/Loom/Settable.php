@@ -107,6 +107,8 @@ class Settable
     /**
      * Get a value
      *
+     * TODO: Clean up
+     *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-20
      * @access public
@@ -130,10 +132,20 @@ class Settable
                 return null;
             }
         } else {
-            // TODO: Implement key multi-level checking here
+            $subkeys = explode($this->delimeter, $key);
+            $tmp       = $this->data;
+
+            foreach ($subkeys as $s) {
+                if (is_array($tmp) && isset($tmp[$s])) {
+                    $tmp = $tmp[$s];
+                } else {
+                    return null;
+                }
+            }
+            $return = $tmp;
         }
 
-        if (is_null($type) || $this->checkType($key, $type)) {
+        if (is_null($type) || $this->checkType($return, $type)) {
             return $return;
         } else {
             return null;
