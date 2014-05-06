@@ -18,4 +18,35 @@ namespace Loom;
 class Directory
 {
 
+    private $path;
+
+    public function __construct($path)
+    {
+        $this->path = $path;
+    }
+
+    public function create($mode = 0777, $recursive = false)
+    {
+    }
+
+    public function delete($recursive = false)
+    {
+    }
+
+    public function isReadable()
+    {
+    }
+
+    public function isWriteable()
+    {
+    }
+
+    public function read($recursive = false)
+    {
+    }
+
+    public function getTree()
+    {
+    }
+    
 }
