@@ -13,7 +13,7 @@ namespace Loom;
  * variables with type-checking.
  *
  * @package Loom
- * @version 2014-01-21
+ * @version 2014-03-06
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class Settable
@@ -133,7 +133,7 @@ class Settable
             }
         } else {
             $subkeys = explode($this->delimeter, $key);
-            $tmp       = $this->data;
+            $tmp     = $this->data;
 
             foreach ($subkeys as $s) {
                 if (is_array($tmp) && isset($tmp[$s])) {
@@ -166,6 +166,33 @@ class Settable
      */
     public function remove($key)
     {
+        if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxKeyLength) {
+            return false;
+        }
+
+        if (!$this->get($key)) {
+            return false;
+        }
+
+        $subkeys    =  explode($this->delimeter, $key);
+        $numSubkeys =  count($subkeys);
+        $pList[]    =& $this->data;
+        $ptr        =& $this->data;
+
+        // Populate the pointer list
+        foreach ($subkeys as $s) {
+            if (isset($ptr[$s])) {
+                $pList[$s] =& $ptr[$s];
+                $ptr       =& $ptr[$s];
+            }
+        }
+        
+        for ($i = sizeof($pList) - 1; $i >= 0; --$i) {
+            $sk = $subkeys[$i];
+            
+            // if (isset($pList
+        }
+        
     }
 
 
