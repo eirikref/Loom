@@ -45,16 +45,16 @@ class Config
         }
 
         switch ($file->getExtension()) {
-        case 'yaml':
-            $this->readYaml($file);
-            break;
+            case 'yaml':
+                $this->readYaml($file);
+                break;
 
-        case 'ini':
-            $this->readIni($file);
-            break;
+            case 'ini':
+                $this->readIni($file);
+                break;
 
-        default:
-            break;
+            default:
+                break;
         }
     }
 
@@ -62,5 +62,4 @@ class Config
     {
         return $this->ready;
     }
-
 }

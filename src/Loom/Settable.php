@@ -237,32 +237,32 @@ class Settable
         }
 
         switch ($type) {
-        case 'string':
-            if (is_string($value)) {
-                $isValid = true;
-            }
-            break;
-
-        case 'digit':
-            if (is_int($value) || is_string($value)) {
-                if (ctype_digit((string)$value)) {
+            case 'string':
+                if (is_string($value)) {
                     $isValid = true;
                 }
-            }
-            break;
-            
-        case 'int':
-            if (is_int($value)) {
-                $isValid = true;
-            }
-            break;
+                break;
 
-        case 'bool':
-        case 'boolean':
-            if (is_bool($value)) {
-                $isValid = true;
-            }
-            break;
+            case 'digit':
+                if (is_int($value) || is_string($value)) {
+                    if (ctype_digit((string)$value)) {
+                        $isValid = true;
+                    }
+                }
+                break;
+
+            case 'int':
+                if (is_int($value)) {
+                    $isValid = true;
+                }
+                break;
+
+            case 'bool':
+            case 'boolean':
+                if (is_bool($value)) {
+                    $isValid = true;
+                }
+                break;
         }
 
         return $isValid;
