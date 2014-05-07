@@ -78,7 +78,7 @@ class Settable
             return true;
         }
 
-        $keys    =  explode($this->delimeter, $key);
+        $keys    =  explode($this->delimiter, $key);
         $numKeys =  count($keys);
         $ptr     =& $this->data;
 
@@ -132,7 +132,7 @@ class Settable
                 return null;
             }
         } else {
-            $subkeys = explode($this->delimeter, $key);
+            $subkeys = explode($this->delimiter, $key);
             $tmp     = $this->data;
 
             foreach ($subkeys as $s) {
@@ -174,7 +174,7 @@ class Settable
             return false;
         }
 
-        $subkeys    =  explode($this->delimeter, $key);
+        $subkeys    =  explode($this->delimiter, $key);
         $numSubkeys =  count($subkeys);
         $pList[]    =& $this->data;
         $ptr        =& $this->data;
