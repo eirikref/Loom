@@ -13,7 +13,7 @@ namespace Loom;
  * variables with type-checking.
  *
  * @package Loom
- * @version 2014-03-06
+ * @version 2014-05-07
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class Settable
@@ -66,11 +66,11 @@ class Settable
     public function set($key, $value, $type = null)
     {
         if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxKeyLength) {
-            return false;
+            return null;
         }
 
         if (!is_null($type) && false === $this->checkType($value, $type)) {
-            return false;
+            return null;
         }
 
         if (!strstr($key, $this->delimiter)) {
@@ -120,7 +120,7 @@ class Settable
     public function get($key, $type = null)
     {
         if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxKeyLength) {
-            return false;
+            return null;
         }
 
         $return = null;
