@@ -182,17 +182,23 @@ class Settable
         // Populate the pointer list
         foreach ($subkeys as $s) {
             if (isset($ptr[$s])) {
-                $pList[$s] =& $ptr[$s];
-                $ptr       =& $ptr[$s];
+                $pList[] =& $ptr[$s];
+                $ptr     =& $ptr[$s];
             }
         }
+        array_pop($pList);
         
         for ($i = sizeof($pList) - 1; $i >= 0; --$i) {
             $sk = $subkeys[$i];
-            
-            // if (isset($pList
+
+            if (isset($pList[$i][$sk])) {
+                unset($pList[$i][$sk]);
+            }
+
+            if (count($pList[$i])) {
+                break;
+            }
         }
-        
     }
 
 
