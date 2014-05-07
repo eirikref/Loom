@@ -18,8 +18,26 @@ namespace Loom;
 class Config
 {
 
+    /**
+     * Is the config instance ready or not?
+     *
+     * @var    bool $ready
+     * @access private
+     */
     private $ready = true;
 
+
+
+    /**
+     * Constructor
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-07
+     * @access public
+     * @return void
+     *
+     * @param  mixed $file File object or file path to config file
+     */
     public function __construct($file = null)
     {
         if ($file) {
