@@ -167,11 +167,11 @@ class Settable
     public function remove($key)
     {
         if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxKeyLength) {
-            return false;
+            return null;
         }
 
         if (!$this->get($key)) {
-            return false;
+            return null;
         }
 
         $subkeys    =  explode($this->delimiter, $key);
