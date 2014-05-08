@@ -117,9 +117,11 @@ class Settable
      * @param  string $key  The variable name
      * @param  string $type Set for strict type checking
      */
-    public function get($key, $type = null)
+    public function get($key = null, $type = null)
     {
-        if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxKeyLength) {
+        if (is_null($key)) {
+            return $this->data;
+        } elseif (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxKeyLength) {
             return null;
         }
 
