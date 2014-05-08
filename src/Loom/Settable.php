@@ -265,12 +265,31 @@ class Settable
                 }
                 break;
 
+            case 'float':
+                if (is_float($value)) {
+                    $isValid = true;
+                }
+                break;
+
             case 'bool':
             case 'boolean':
                 if (is_bool($value)) {
                     $isValid = true;
                 }
                 break;
+
+            case 'array':
+                if (is_array($value)) {
+                    $isValid = true;
+                }
+                break;
+
+            case 'object':
+                if (is_object($value)) {
+                    $isValid = true;
+                }
+                break;
+
         }
 
         return $isValid;
