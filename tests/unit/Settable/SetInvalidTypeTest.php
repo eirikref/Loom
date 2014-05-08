@@ -10,7 +10,7 @@ namespace Loom\Tests\Unit\Settable;
  * Loom: Unit tests for making sure Settable::set() behaves correctly
  * when given invalid keys.
  *
- * @package    Fiber
+ * @package    Loom
  * @subpackage Tests
  * @version    2014-05-08
  * @author     Eirik Refsdal <eirikref@gmail.com>
