@@ -92,4 +92,49 @@ class SetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($value, $store->get($key));
         $this->assertEquals(1, count($store->get()));
     }
+
+
+
+    /**
+     * Test setting a single value using a multi-level key
+     *
+     * @test
+     * @dataProvider getValues
+     * @covers       \Loom\Settable::set
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2014-05-08
+     * @access       public
+     * @return       void
+     */
+    public function testSingleValueWithMultiLevelKey($value)
+    {
+        $key   = "a.b.c";
+        $store = new \Loom\Settable();
+        $this->assertTrue($store->set($key, $value));
+        $this->assertEquals($value, $store->get($key));
+        $this->assertEquals(1, count($store->get()));
+    }
+
+
+
+    /**
+     * Test setting a single value using multi-level key and the
+     * corresponding type
+     *
+     * @test
+     * @dataProvider getValues
+     * @covers       \Loom\Settable::set
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2014-05-08
+     * @access       public
+     * @return       void
+     */
+    public function testSingleValueWithTypeAndMultiLevelKey($value, $type)
+    {
+        $key   = "a.b.c";
+        $store = new \Loom\Settable();
+        $this->assertTrue($store->set($key, $value, $type));
+        $this->assertEquals($value, $store->get($key));
+        $this->assertEquals(1, count($store->get()));
+    }
 }
