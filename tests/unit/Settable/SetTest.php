@@ -18,7 +18,7 @@ namespace Loom\Tests\Unit\Settable;
  *
  * @package    Loom
  * @subpackage Tests
- * @version    2014-05-08
+ * @version    2014-05-09
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class SetTest extends \PHPUnit_Framework_TestCase
@@ -136,5 +136,145 @@ class SetTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($store->set($key, $value, $type));
         $this->assertEquals($value, $store->get($key));
         $this->assertEquals(1, count($store->get()));
+    }
+
+
+
+    /**
+     * Test replacing a simple key value
+     *
+     * @test
+     * @covers \Loom\Settable::set
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-08
+     * @access public
+     * @return void
+     */
+    public function testReplacingSimpleKeyValue()
+    {
+        $key         = "mykey";
+        $firstValue  = "some value";
+        $secondValue = 11;
+        $store       = new \Loom\Settable();
+
+        $store->set($key, $firstValue);
+        $this->assertEquals($firstValue, $store->get($key));
+        $this->assertEquals(1, count($store->get()));
+
+        $store->set($key, $secondValue);
+        $this->assertEquals($secondValue, $store->get($key));
+        $this->assertEquals(1, count($store->get()));
+    }
+
+
+
+    /**
+     * Test replacing a multi-key value
+     *
+     * @test
+     * @covers \Loom\Settable::set
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-08
+     * @access public
+     * @return void
+     */
+    public function testReplacingMultiKeyValue()
+    {
+        $key         = "a.b.c";
+        $firstValue  = "some value";
+        $secondValue = 11;
+        $store       = new \Loom\Settable();
+
+        $store->set($key, $firstValue);
+        $this->assertEquals($firstValue, $store->get($key));
+        $this->assertEquals(1, count($store->get()));
+
+        $store->set($key, $secondValue);
+        $this->assertEquals($secondValue, $store->get($key));
+        $this->assertEquals(3, count($store->get(), COUNT_RECURSIVE));
+    }
+
+
+
+    /**
+     * Test setting subvalues below already existing values
+     *
+     * @test
+     * @covers \Loom\Settable::set
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-08
+     * @access public
+     * @return void
+     */
+    public function testAddingSubValues()
+    {
+        $levelOneKey    = "a.b.c";
+        $levelOneValue  = "some value";
+        $levelTwoKey    = "a.b.c.d.e";
+        $levelTwoValue  = "something else";
+        $store          = new \Loom\Settable();
+        
+        $store->set($levelOneKey, $levelOneValue);
+        $store->set($levelTwoKey, $levelTwoValue);
+
+        $this->assertNotEquals($levelOneValue, $store->get($levelOneKey));
+        $this->assertEquals($levelTwoValue, $store->get($levelTwoKey));
+    }
+
+
+
+    /**
+     * Test setting a value for a key that already exists with sub
+     * values
+     *
+     * @test
+     * @covers \Loom\Settable::set
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-09
+     * @access public
+     * @return void
+     */
+    public function testAddingValueWhenSubValuesExist()
+    {
+        $levelOneKey    = "a.b.c.d.e";
+        $levelOneValue  = "some value";
+        $levelTwoKey    = "a.b.c";
+        $levelTwoValue  = "something else";
+        $store          = new \Loom\Settable();
+        
+        $store->set($levelOneKey, $levelOneValue);
+        $store->set($levelTwoKey, $levelTwoValue);
+
+        $this->assertNotEquals($levelOneValue, $store->get($levelOneKey));
+        $this->assertEquals($levelTwoValue, $store->get($levelTwoKey));
+        $this->assertEquals(3, count($store->get(), COUNT_RECURSIVE));
+    }
+
+
+
+    /**
+     * Test setting multiple values on the same sub level
+     *
+     * @test
+     * @covers \Loom\Settable::set
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-08
+     * @access public
+     * @return void
+     */
+    public function testAddingMultipleValuesOnSameSubLevel()
+    {
+        $levelOneKey    = "a.b.c";
+        $levelOneValue  = "some value";
+        $levelTwoKey    = "a.b.d";
+        $levelTwoValue  = "something else";
+        $store          = new \Loom\Settable();
+        
+        $store->set($levelOneKey, $levelOneValue);
+        $store->set($levelTwoKey, $levelTwoValue);
+
+        $this->assertEquals($levelOneValue, $store->get($levelOneKey));
+        $this->assertEquals($levelTwoValue, $store->get($levelTwoKey));
+        $this->assertEquals(4, count($store->get(), COUNT_RECURSIVE));
     }
 }
