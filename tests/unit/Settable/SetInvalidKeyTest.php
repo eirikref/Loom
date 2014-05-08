@@ -60,7 +60,7 @@ class SetInvalidKeyTest extends \PHPUnit_Framework_TestCase
     {
         $store = new \Loom\Settable();
         $this->assertNull($store->set($key, "myvalue"));
-        $this->assertEquals([], $store->get());
+        $this->assertEmpty($store->get());
     }
 
 
@@ -79,7 +79,7 @@ class SetInvalidKeyTest extends \PHPUnit_Framework_TestCase
     {
         $store = new \Loom\Settable();
         $this->assertNull($store->set("", "myvalue"));
-        $this->assertEquals([], $store->get());
+        $this->assertEmpty($store->get());
     }
 
 
@@ -100,6 +100,6 @@ class SetInvalidKeyTest extends \PHPUnit_Framework_TestCase
         $store        = new \Loom\Settable();
 
         $this->assertNull($store->set(str_repeat("a", $maxKeyLength + 1), "myvalue"));
-        $this->assertEquals([], $store->get());
+        $this->assertEmpty($store->get());
     }
 }
