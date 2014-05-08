@@ -1,5 +1,8 @@
 # Loom
 
+[![Build Status](https://travis-ci.org/eirikref/Loom.svg?branch=master)](https://travis-ci.org/eirikref/Loom)
+[![Coverage Status](https://coveralls.io/repos/eirikref/Loom/badge.png?branch=master)](https://coveralls.io/r/eirikref/Loom?branch=master)
+
 Loom is what one day might become my simple, small, personal go-to PHP
 library. For now it is nothing but work-in-progress, and not really
 meant to be used by anyone else.
