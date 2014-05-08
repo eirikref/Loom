@@ -13,7 +13,7 @@ namespace Loom;
  * variables with type-checking.
  *
  * @package Loom
- * @version 2014-05-07
+ * @version 2014-05-09
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class Settable
@@ -52,7 +52,7 @@ class Settable
      * 2. Loop through key parts, if they don't exist, create empty array()
      * 3. If on last key part, set value
      * 4. If actual key exists, replace it
-     * 5. If non-array key exists and trying to set sub-key, convert to array?
+     * 5. If non-array key exists and trying to set sub-key, overwrite it
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-20
@@ -69,34 +69,43 @@ class Settable
             return null;
         }
 
+        // The only place we'll check the value, if type is set. Past
+        // this point we accept the value whatever it is.
         if (!is_null($type) && false === $this->checkType($value, $type)) {
             return null;
         }
 
+        // If the delimiter is NOT present in the key, just set the
+        // value.
         if (!strstr($key, $this->delimiter)) {
             $this->data[$key] = $value;
             return true;
         }
 
-        $keys    =  explode($this->delimiter, $key);
-        $numKeys =  count($keys);
-        $ptr     =& $this->data;
+        // At this point we have a multi-level key, so we need to work
+        // our way through the parts of the key and set the value at
+        // the appropriate point.
+        $subkeys    =  explode($this->delimiter, $key);
+        $numSubkeys =  count($subkeys);
+        $ptr        =& $this->data;
 
-        for ($i = 0; $i < $numKeys; ++$i) {
-            $key    = $keys[$i];
-            $lastEl = ($i == ($numKeys - 1)) ? true : false;
+        for ($i = 0; $i < $numSubkeys; ++$i) {
+            $sk     = $subkeys[$i];
+            $lastEl = ($i == ($numSubkeys - 1)) ? true : false;
 
             if (true === $lastEl) {
-                $ptr[$key] = $value;
+                $ptr[$sk] = $value;
             } else {
-                if (isset($ptr[$key])) {
-                    // Ignore for now
+                if (isset($ptr[$sk])) {
+                    if (!is_array($ptr[$sk])) {
+                        $ptr[$sk] = array();
+                    }
                 } else {
-                    $ptr[$key] = array();
+                    $ptr[$sk] = array();
                 }
             }
             
-            $ptr =& $ptr[$key];
+            $ptr =& $ptr[$sk];
         }
 
         return true;
