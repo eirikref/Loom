@@ -8,7 +8,7 @@ namespace Loom\Tests\Unit\Settable;
 
 /**
  * Loom: Unit tests for making sure Settable::set() behaves correctly
- * when given invalid keys.
+ * when given keys and non-matching types.
  *
  * @package    Loom
  * @subpackage Tests
