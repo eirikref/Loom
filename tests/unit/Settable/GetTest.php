@@ -10,8 +10,6 @@ namespace Loom\Tests\Unit\Settable;
  * Loom: Unit tests for making sure Settable::get() behaves as
  * expected when setting valid data
  *
- * -
- *
  * @package    Loom
  * @subpackage Tests
  * @version    2014-05-09
