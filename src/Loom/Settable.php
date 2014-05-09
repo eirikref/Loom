@@ -206,10 +206,12 @@ class Settable
                 unset($pList[$i][$sk]);
             }
 
-            if (count($pList[$i])) {
+            if (count($pList[$i]) > 0) {
                 break;
             }
         }
+
+        return true;
     }
 
 
