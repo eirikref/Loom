@@ -13,7 +13,7 @@ namespace Loom;
  * variables with type-checking.
  *
  * @package Loom
- * @version 2014-05-09
+ * @version 2014-05-10
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class Settable
@@ -218,6 +218,10 @@ class Settable
 
     /**
      * Set delimiter for multi-level keys
+     *
+     * TODO: Consider what should be done if the delimiter is changed
+     * AFTER values have been set. Maybe you should be all on your
+     * own?
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-20
