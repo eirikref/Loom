@@ -7,20 +7,20 @@
 namespace Loom\Tests\Unit\Settable;
 
 /**
- * Loom: Unit tests for making sure Settable::set() behaves correctly
- * when given invalid keys.
+ * Loom: Unit tests for making sure Settable::checkType() handle
+ * strings correctly.
  *
  * @package    Loom
  * @subpackage Tests
  * @version    2014-05-10
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class CheckTypeInvalidTypeTest extends \PHPUnit_Framework_TestCase
+class CheckTypeStringTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      * Data provider with non-strings, to be used for testing invalid
-     * types
+     * values
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-10
@@ -44,7 +44,7 @@ class CheckTypeInvalidTypeTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test that checkType() handles non-string keys
+     * Test that checkType() does not allow non-string values as type "string"
      *
      * @test
      * @covers       \Loom\Settable::checkType
@@ -54,62 +54,59 @@ class CheckTypeInvalidTypeTest extends \PHPUnit_Framework_TestCase
      * @access       public
      * @return       void
      *
-     * @param        string $type The type descriptor
+     * @param        string $value The value pretending to be a string
      */
-    public function testNonStrings($type)
+    public function testNonStrings($value)
     {
         $reflection = $this->getMock("\Loom\Settable");
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         
-        $result = $method->invoke($reflection, "myvalue", $type);
+        $result = $method->invoke($reflection, $value, "string");
         $this->assertFalse($result);
     }
 
 
 
     /**
-     * Test that empty type descriptors are not allowed
+     * Data provider with strings, to be used for testing valid values
      *
-     * @test
-     * @covers \Loom\Settable::checkType
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-10
      * @access public
-     * @return void
+     * @return array
      */
-    public function testEmptyString()
+    public function getStrings()
     {
-        $reflection = $this->getMock("\Loom\Settable");
-        $method = new \ReflectionMethod($reflection, "checkType");
-        $method->setAccessible(true);
-        
-        $result = $method->invoke($reflection, "myvalue", "");
-        $this->assertFalse($result);
+        return array(
+            array("a"),
+            array(""),
+            array(str_repeat("a", 1024))
+        );
     }
 
 
 
     /**
-     * Test that too long type descriptors are not allowed
+     * Test that checkType() allows string values as type "string"
      *
      * @test
-     * @covers \Loom\Settable::checkType
-     * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-05-10
-     * @access public
-     * @return void
+     * @covers       \Loom\Settable::checkType
+     * @dataProvider getStrings
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2014-05-10
+     * @access       public
+     * @return       void
+     *
+     * @param        mixed $value The value pretending to be a string
      */
-    public function testTooLongString()
+    public function testStrings($value)
     {
-        $maxKeyLength = 128;
-        $arg          = str_repeat("a", $maxKeyLength + 1);
-        $reflection   = $this->getMock("\Loom\Settable");
-        $method       = new \ReflectionMethod($reflection, "checkType");
-
+        $reflection = $this->getMock("\Loom\Settable");
+        $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
-
-        $result = $method->invoke($reflection, "myvalue", $arg);
-        $this->assertFalse($result);
+        
+        $result = $method->invoke($reflection, $value, "string");
+        $this->assertTrue($result);
     }
 }
