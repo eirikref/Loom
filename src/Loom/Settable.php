@@ -255,7 +255,7 @@ class Settable
     {
         $isValid = false;
 
-        if (!is_string($type)) {
+        if (!is_string($type) || strlen($type) < 1 || strlen($type) > $this->maxKeyLength) {
             return false;
         }
 
