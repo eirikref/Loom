@@ -8,30 +8,29 @@ namespace Loom\Tests\Unit\Settable;
 
 /**
  * Loom: Unit tests for making sure Settable::checkType() handle
- * strings correctly.
+ * ints correctly.
  *
  * @package    Loom
  * @subpackage Tests
- * @version    2014-05-10
+ * @version    2014-05-11
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class CheckTypeStringTest extends \PHPUnit_Framework_TestCase
+class CheckTypeIntTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Data provider with non-strings, to be used for testing invalid
+     * Data provider with non-ints, to be used for testing invalid
      * values
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-05-10
+     * @since  2014-05-11
      * @access public
      * @return array
      */
-    public function getNonStrings()
+    public function getNonInts()
     {
         return array(
-            array(11),
-            array(-3),
+            array("some string"),
             array(3.14),
             array(true),
             array(false),
@@ -44,62 +43,60 @@ class CheckTypeStringTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test that checkType() does not allow non-string values as type
-     * "string"
+     * Test that checkType() does not allow non-int values as type "int"
      *
      * @test
      * @covers       \Loom\Settable::checkType
-     * @dataProvider getNonStrings
+     * @dataProvider getNonInts
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-05-10
+     * @since        2014-05-11
      * @access       public
      * @return       void
      *
-     * @param        string $value The value pretending to be a string
+     * @param        mixed $value The value pretending to be a string
      */
-    public function testNonStrings($value)
+    public function testNonInts($value)
     {
         $reflection = $this->getMock("\Loom\Settable");
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         
-        $result = $method->invoke($reflection, $value, "string");
+        $result = $method->invoke($reflection, $value, "int");
         $this->assertFalse($result);
     }
 
 
 
     /**
-     * Data provider with strings, to be used for testing valid values
+     * Data provider with ints, to be used for testing valid values
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-05-10
+     * @since  2014-05-11
      * @access public
      * @return array
      */
-    public function getStrings()
+    public function getInts()
     {
         return array(
-            array("a"),
-            array(""),
-            array(str_repeat("a", 1024))
+            array(123),
+            array(-123)
         );
     }
 
 
 
     /**
-     * Test that checkType() allows string values as type "string"
+     * Test that checkType() allows int values as type "int"
      *
      * @test
      * @covers       \Loom\Settable::checkType
-     * @dataProvider getStrings
+     * @dataProvider getInts
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-05-10
+     * @since        2014-05-11
      * @access       public
      * @return       void
      *
-     * @param        mixed $value The value pretending to be a string
+     * @param        int $value The value pretending to be a int
      */
     public function testStrings($value)
     {
@@ -107,7 +104,7 @@ class CheckTypeStringTest extends \PHPUnit_Framework_TestCase
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         
-        $result = $method->invoke($reflection, $value, "string");
+        $result = $method->invoke($reflection, $value, "int");
         $this->assertTrue($result);
     }
 }

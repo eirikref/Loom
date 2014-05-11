@@ -8,34 +8,34 @@ namespace Loom\Tests\Unit\Settable;
 
 /**
  * Loom: Unit tests for making sure Settable::checkType() handle
- * strings correctly.
+ * digits correctly.
  *
  * @package    Loom
  * @subpackage Tests
- * @version    2014-05-10
+ * @version    2014-05-11
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class CheckTypeStringTest extends \PHPUnit_Framework_TestCase
+class CheckTypeDigitTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Data provider with non-strings, to be used for testing invalid
+     * Data provider with non-digits, to be used for testing invalid
      * values
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-05-10
+     * @since  2014-05-11
      * @access public
      * @return array
      */
-    public function getNonStrings()
+    public function getNonDigits()
     {
         return array(
-            array(11),
             array(-3),
             array(3.14),
             array(true),
             array(false),
             array(null),
+            array("some string"),
             array(array()),
             array(new \stdClass())
         );
@@ -44,70 +44,68 @@ class CheckTypeStringTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test that checkType() does not allow non-string values as type
-     * "string"
+     * Test that checkType() does not allow non-digit values as type "digit"
      *
      * @test
      * @covers       \Loom\Settable::checkType
-     * @dataProvider getNonStrings
+     * @dataProvider getNonDigits
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-05-10
+     * @since        2014-05-11
      * @access       public
      * @return       void
      *
-     * @param        string $value The value pretending to be a string
+     * @param        mixed $value The value pretending to be a digit
      */
-    public function testNonStrings($value)
+    public function testNonDigits($value)
     {
         $reflection = $this->getMock("\Loom\Settable");
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         
-        $result = $method->invoke($reflection, $value, "string");
+        $result = $method->invoke($reflection, $value, "digit");
         $this->assertFalse($result);
     }
 
 
 
     /**
-     * Data provider with strings, to be used for testing valid values
+     * Data provider with digits, to be used for testing valid values
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-05-10
+     * @since  2014-05-11
      * @access public
      * @return array
      */
-    public function getStrings()
+    public function getDigits()
     {
         return array(
-            array("a"),
-            array(""),
-            array(str_repeat("a", 1024))
+            array("123"),
+            array(123)
         );
     }
 
 
 
     /**
-     * Test that checkType() allows string values as type "string"
+     * Test that checkType() allows digit values as type "digit"
      *
      * @test
      * @covers       \Loom\Settable::checkType
-     * @dataProvider getStrings
+     * @dataProvider getDigits
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-05-10
+     * @since        2014-05-11
      * @access       public
      * @return       void
      *
-     * @param        mixed $value The value pretending to be a string
+     * @param        mixed $value The value pretending to be a digit
      */
-    public function testStrings($value)
+    public function testDigits($value)
     {
         $reflection = $this->getMock("\Loom\Settable");
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         
-        $result = $method->invoke($reflection, $value, "string");
+        $result = $method->invoke($reflection, $value, "digit");
         $this->assertTrue($result);
     }
 }

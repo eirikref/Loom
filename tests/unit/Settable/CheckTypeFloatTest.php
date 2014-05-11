@@ -8,31 +8,31 @@ namespace Loom\Tests\Unit\Settable;
 
 /**
  * Loom: Unit tests for making sure Settable::checkType() handle
- * strings correctly.
+ * floats correctly.
  *
  * @package    Loom
  * @subpackage Tests
- * @version    2014-05-10
+ * @version    2014-05-11
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class CheckTypeStringTest extends \PHPUnit_Framework_TestCase
+class CheckTypeFloatTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Data provider with non-strings, to be used for testing invalid
+     * Data provider with non-floats, to be used for testing invalid
      * values
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-05-10
+     * @since  2014-05-11
      * @access public
      * @return array
      */
-    public function getNonStrings()
+    public function getNonFloats()
     {
         return array(
             array(11),
             array(-3),
-            array(3.14),
+            array("some string"),
             array(true),
             array(false),
             array(null),
@@ -44,70 +44,70 @@ class CheckTypeStringTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test that checkType() does not allow non-string values as type
-     * "string"
+     * Test that checkType() does not allow non-float values as type
+     * "float"
      *
      * @test
      * @covers       \Loom\Settable::checkType
-     * @dataProvider getNonStrings
+     * @dataProvider getNonFloats
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-05-10
+     * @since        2014-05-11
      * @access       public
      * @return       void
      *
-     * @param        string $value The value pretending to be a string
+     * @param        mixed $value The value pretending to be a float
      */
-    public function testNonStrings($value)
+    public function testNonFloats($value)
     {
         $reflection = $this->getMock("\Loom\Settable");
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         
-        $result = $method->invoke($reflection, $value, "string");
+        $result = $method->invoke($reflection, $value, "float");
         $this->assertFalse($result);
     }
 
 
 
     /**
-     * Data provider with strings, to be used for testing valid values
+     * Data provider with floats, to be used for testing valid values
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-05-10
+     * @since  2014-05-11
      * @access public
      * @return array
      */
-    public function getStrings()
+    public function getFloats()
     {
         return array(
-            array("a"),
-            array(""),
-            array(str_repeat("a", 1024))
+            array(3.14),
+            array(-3.14),
+            array(123456789.0)
         );
     }
 
 
 
     /**
-     * Test that checkType() allows string values as type "string"
+     * Test that checkType() allows float values as type "float"
      *
      * @test
      * @covers       \Loom\Settable::checkType
-     * @dataProvider getStrings
+     * @dataProvider getFloats
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-05-10
+     * @since        2014-05-11
      * @access       public
      * @return       void
      *
-     * @param        mixed $value The value pretending to be a string
+     * @param        float $value The value pretending to be a float
      */
-    public function testStrings($value)
+    public function testFloats($value)
     {
         $reflection = $this->getMock("\Loom\Settable");
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         
-        $result = $method->invoke($reflection, $value, "string");
+        $result = $method->invoke($reflection, $value, "float");
         $this->assertTrue($result);
     }
 }
