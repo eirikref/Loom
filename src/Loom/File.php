@@ -12,17 +12,110 @@ namespace Loom;
  * Class representing a generic file on a file system
  *
  * @package Loom
- * @version 2014-05-06
+ * @version 2014-05-26
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class File
 {
+    
+    private $inputPath;
+    private $path;
+    private $content;
+    
 
-    public function __construct($filename)
+
+    /**
+     * Constructor
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-14
+     * @access public
+     * @return void
+     *
+     * @param  string $path The file path
+     */
+    public function __construct($path = null)
     {
-        $this->filename = $filename;
-        $this->path     = $filename;
+        if ($path) {
+            $this->setPath($path);
+        }
     }
+
+
+
+    /**
+     * Set path
+     *
+     * FIXME: Should probably not allow just about anything? Check to
+     * see that the path actually points to a file (ie. not a dir,
+     * what about symlinks?). And probably within allowed dirs?
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-15
+     * @access public
+     * @return bool
+     *
+     * @param  string $path The file path
+     */
+    public function setPath($path)
+    {
+        if (!is_string($path) || empty($path)) {
+            return false;
+        }
+
+        $this->inputPath = $path;
+
+        if ("/" == substr($path, 0, 1)) {
+            $this->path = $path;
+        } else {
+            $this->path = $this->resolvePath($path);
+        }
+
+        return true;
+    }
+
+
+
+    /**
+     * Get path
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-26
+     * @access public
+     * @return mixed String if set, otherwise null
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+
+    
+    private function resolvePath($path)
+    {
+        $base   = explode("/", $_SERVER["PWD"]);
+        $remove = 0;
+        $add    = array();
+
+        if ("./" == substr($path, 0, 2)) {
+            $add = explode("/", substr($path, 2));
+        } elseif ("../" == substr($path, 0, 2)) {
+            // Implement me.  Count number of "../" at start of
+            // string, and then remove that part of the string.
+            // explode() on the remainder of $path, set to $add
+        } else {
+            $add = explode("/", $path);
+        }
+
+        if ($remove > 0) {
+            for ($i = 0; $i <= $remove - 1; ++$i) {
+                array_pop($base);
+            }
+        }
+
+        return implode("/", array_merge($base, $add));
+    }
+
 
     public function exists()
     {
