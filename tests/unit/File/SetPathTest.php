@@ -172,8 +172,13 @@ class SetPathTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithDoubleDotPaths($input, $numRemove, $append)
     {
-        $file = new \Loom\File();
-        $exp  = $_SERVER['PWD'] . $append;
+        $file  = new \Loom\File();
+        $parts = explode("/", $_SERVER["PWD"]);
+
+        for ($i = 0; $i < $numRemove; ++$i) {
+            array_pop($parts);
+        }
+        $exp = implode("/", $parts) . $append;
         
         $this->assertTrue($file->setPath($input));
         $this->assertEquals($exp, $file->getPath());
