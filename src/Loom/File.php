@@ -99,10 +99,13 @@ class File
 
         if ("./" == substr($path, 0, 2)) {
             $add = explode("/", substr($path, 2));
-        } elseif ("../" == substr($path, 0, 2)) {
-            // Implement me.  Count number of "../" at start of
-            // string, and then remove that part of the string.
-            // explode() on the remainder of $path, set to $add
+        } elseif ("../" == substr($path, 0, 3)) {
+            $pattern = "/^(\.\.\/)+/";
+            preg_match($pattern, $path, $matches);
+
+            $dotsLen = strlen($matches[0]);
+            $remove  = $dotsLen / 3;
+            $add     = explode("/", substr($path, $dotsLen));
         } else {
             $add = explode("/", $path);
         }
