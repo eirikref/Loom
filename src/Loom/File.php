@@ -146,7 +146,7 @@ class File
 
 
     /**
-     * Check if file exists
+     * Check if the file exists
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-28
@@ -164,6 +164,14 @@ class File
 
 
 
+    /**
+     * Check if the file is readable
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-28
+     * @access public
+     * @return boolean True if the file is readable, otherwise false
+     */
     public function isReadable()
     {
         if (is_readable($this->path)) {
