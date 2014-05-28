@@ -12,7 +12,7 @@ namespace Loom;
  * Class representing a generic file on a file system
  *
  * @package Loom
- * @version 2014-05-26
+ * @version 2014-05-28
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class File
@@ -91,8 +91,22 @@ class File
 
 
     
+    /**
+     * Resolve path
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-26
+     * @access private
+     * @return string The resolved path
+     *
+     * @param  string $path The path to be resolved
+     */
     private function resolvePath($path)
     {
+        if (!is_string($path)) {
+            return false;
+        }
+
         $base   = explode("/", $_SERVER["PWD"]);
         $remove = 0;
         $add    = array();
