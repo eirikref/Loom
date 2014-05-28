@@ -4,7 +4,7 @@
  * Copyright (c) 2014 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Loom\Tests\Unit\Settable;
+namespace Loom\Tests\Unit\File;
 
 /**
  * Loom: Unit tests for File::__construct()
