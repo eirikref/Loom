@@ -18,8 +18,20 @@ namespace Loom;
 class File
 {
     
-    private $inputPath;
+    /**
+     * File path
+     *
+     * @var    string $path
+     * @access private
+     */
     private $path;
+
+    /**
+     * File content
+     *
+     * @var    string $content
+     * @access private
+     */
     private $content;
     
 
@@ -62,8 +74,6 @@ class File
         if (!is_string($path) || empty($path)) {
             return false;
         }
-
-        $this->inputPath = $path;
 
         if ("/" == substr($path, 0, 1)) {
             $this->path = $path;
@@ -134,6 +144,15 @@ class File
     }
 
 
+
+    /**
+     * Check if file exists
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-28
+     * @access public
+     * @return boolean True if the file exists, otherwise false
+     */
     public function exists()
     {
         if (file_exists($this->path)) {
@@ -142,6 +161,8 @@ class File
             return false;
         }
     }
+
+
 
     public function isReadable()
     {
