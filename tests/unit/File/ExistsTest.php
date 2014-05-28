@@ -7,7 +7,7 @@
 namespace Loom\Tests\Unit\File;
 
 /**
- * Loom: Unit tests for File::setPath()
+ * Loom: Unit tests for File::exists()
  *
  * @package    Loom
  * @subpackage Tests
