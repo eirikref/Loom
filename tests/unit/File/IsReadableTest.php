@@ -95,7 +95,7 @@ class IsReadableTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonReadableFile()
     {
-        chmod($this->path, 0222);
+        chmod($this->path, 0000);
 
         $file = new \Loom\File($this->path);
         $this->assertFalse($file->isReadable());
