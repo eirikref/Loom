@@ -257,6 +257,8 @@ class File
     /**
      * Write the file
      *
+     * FIXME: What about creating new files?
+     *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-14
      * @access public

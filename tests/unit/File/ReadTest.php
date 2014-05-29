@@ -11,7 +11,7 @@ namespace Loom\Tests\Unit\File;
  *
  * - Exists and readable
  * - Exists, not readable
- * - Does not exist 
+ * - Does not exist
  *
  * @package    Loom
  * @subpackage Tests
