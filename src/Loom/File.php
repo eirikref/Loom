@@ -1,7 +1,7 @@
 <?php
 /**
  * Loom: File
- * Copyright (c) 2013 Eirik Refsdal <eirikref@gmail.com>
+ * Copyright (c) 2013-2014 Eirik Refsdal <eirikref@gmail.com>
  */
 
 namespace Loom;
@@ -240,13 +240,16 @@ class File
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-14
      * @access public
-     * @return void
+     * @return boolean True if able to read, otherwise false
      */
     public function read()
     {
         if ($this->exists() && $this->isReadable()) {
             $this->content = file_get_contents($this->path);
+            return true;
         }
+
+        return false;
     }
 
 
@@ -261,16 +264,13 @@ class File
      */
     public function write()
     {
-        // what if we're creating a new file?
-
-        $ret = false;
-
         if ($this->isWriteable()) {
             $fp  = fopen($this->path, 'w');
             $ret = fwrite($fp, $this->content);
             fclose($fp);
+            return true;
         }
 
-        return $ret;
+        return false;
     }
 }
