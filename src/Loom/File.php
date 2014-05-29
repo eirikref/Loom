@@ -244,7 +244,7 @@ class File
      */
     public function read()
     {
-        if ($this->exists() && $this->isReadable()) {
+        if ($this->isReadable()) {
             $this->content = file_get_contents($this->path);
             return true;
         }
