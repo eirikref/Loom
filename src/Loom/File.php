@@ -149,7 +149,7 @@ class File
      * Check if the file exists
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-05-28
+     * @since  2014-05-14
      * @access public
      * @return boolean True if the file exists, otherwise false
      */
@@ -168,7 +168,7 @@ class File
      * Check if the file is readable
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-05-28
+     * @since  2014-05-14
      * @access public
      * @return boolean True if the file is readable, otherwise false
      */
@@ -181,6 +181,16 @@ class File
         }
     }
 
+
+
+    /**
+     * Check if the file is writeable
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-14
+     * @access public
+     * @return boolean True if the file is writeable, otherwise false
+     */
     public function isWriteable()
     {
         if (is_writeable($this->path)) {
@@ -190,11 +200,48 @@ class File
         }
     }
 
-    public function setContent($in)
+
+
+    /**
+     * Set content
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-14
+     * @access public
+     * @return void
+     *
+     * @param  string $content The file content
+     */
+    public function setContent($content)
     {
-        $this->content = $in;
+        $this->content = $content;
     }
 
+
+
+    /**
+     * Get content
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-28
+     * @access public
+     * @return void
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+
+
+    /**
+     * Read the file
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-14
+     * @access public
+     * @return void
+     */
     public function read()
     {
         if ($this->exists() && $this->isReadable()) {
@@ -202,6 +249,16 @@ class File
         }
     }
 
+
+
+    /**
+     * Write the file
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-05-14
+     * @access public
+     * @return boolean True if the write is successful, otherwise false
+     */
     public function write()
     {
         // what if we're creating a new file?
