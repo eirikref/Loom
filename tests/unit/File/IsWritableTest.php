@@ -7,14 +7,14 @@
 namespace Loom\Tests\Unit\File;
 
 /**
- * Loom: Unit tests for File::isWriteable()
+ * Loom: Unit tests for File::isWritable()
  *
  * @package    Loom
  * @subpackage Tests
  * @version    2014-05-28
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class IsWriteableTest extends \PHPUnit_Framework_TestCase
+class IsWritableTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -64,40 +64,40 @@ class IsWriteableTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Check if the file is writeable
+     * Check if the file is writable
      *
      * @test
-     * @covers \Loom\File::isWriteable
+     * @covers \Loom\File::isWritable
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-28
      * @access public
      * @return void
      */
-    public function testWriteableFile()
+    public function testWritableFile()
     {
         chmod($this->path, 0744);
 
         $file = new \Loom\File($this->path);
-        $this->assertTrue($file->isWriteable());
+        $this->assertTrue($file->isWritable());
     }
 
 
 
     /**
-     * Check a file that is not writeable
+     * Check a file that is not writable
      *
      * @test
-     * @covers \Loom\File::isWriteable
+     * @covers \Loom\File::isWritable
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-28
      * @access public
      * @return void
      */
-    public function testNonWriteableFile()
+    public function testNonWritableFile()
     {
         chmod($this->path, 0000);
 
         $file = new \Loom\File($this->path);
-        $this->assertFalse($file->isWriteable());
+        $this->assertFalse($file->isWritable());
     }
 }

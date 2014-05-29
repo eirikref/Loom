@@ -37,7 +37,7 @@ class Directory
     {
     }
 
-    public function isWriteable()
+    public function isWritable()
     {
     }
 

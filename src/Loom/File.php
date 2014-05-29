@@ -184,16 +184,16 @@ class File
 
 
     /**
-     * Check if the file is writeable
+     * Check if the file is writable
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-14
      * @access public
-     * @return boolean True if the file is writeable, otherwise false
+     * @return boolean True if the file is writable, otherwise false
      */
-    public function isWriteable()
+    public function isWritable()
     {
-        if (is_writeable($this->path)) {
+        if (is_writable($this->path)) {
             return true;
         } else {
             return false;
@@ -264,7 +264,7 @@ class File
      */
     public function write()
     {
-        if ($this->isWriteable()) {
+        if ($this->isWritable()) {
             $fp  = fopen($this->path, 'w');
             $ret = fwrite($fp, $this->content);
             fclose($fp);
