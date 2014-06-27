@@ -11,10 +11,10 @@ namespace Loom\Tests\Unit\File;
  *
  * @package    Loom
  * @subpackage Tests
- * @version    2014-05-26
+ * @version    2014-06-26
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class ConstructorTest extends \PHPUnit_Framework_TestCase
+class FromPathTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -46,16 +46,16 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @dataProvider getInvalidPaths
-     * @covers       \Loom\File::__construct
+     * @covers       \Loom\File::fromPath
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2014-05-14
      * @access       public
      * @return       void
      */
-    public function testConstructorWithInvalidPaths($path)
+    public function testFromPathWithInvalidPaths($path)
     {
-        $file = new \Loom\File($path);
-        $this->assertNull($file->getPath());
+        $file = \Loom\File::fromPath($path);
+        $this->assertNull($file);
     }
 
 
@@ -84,15 +84,15 @@ class ConstructorTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @dataProvider getValidPaths
-     * @covers       \Loom\File::__construct
+     * @covers       \Loom\File::fromPath
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2014-05-26
      * @access       public
      * @return       void
      */
-    public function testConstructorWithValidPaths($path)
+    public function testFromPathWithValidPaths($path)
     {
-        $file = new \Loom\File($path);
+        $file = \Loom\File::fromPath($path);
         $this->assertTrue(is_string($file->getPath()));
     }
 }
