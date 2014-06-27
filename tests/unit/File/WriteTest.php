@@ -15,7 +15,7 @@ namespace Loom\Tests\Unit\File;
  *
  * @package    Loom
  * @subpackage Tests
- * @version    2014-05-29
+ * @version    2014-06-27
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class WriteTest extends \PHPUnit_Framework_TestCase
@@ -25,6 +25,7 @@ class WriteTest extends \PHPUnit_Framework_TestCase
      * Test writing to a file that exists and is writable
      *
      * @test
+     * @covers \Loom\File::write
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-29
      * @access public
@@ -33,7 +34,7 @@ class WriteTest extends \PHPUnit_Framework_TestCase
     public function testWritable()
     {
         $path    = __DIR__ . "/somedir/some-writable-file.txt";
-        $file    = new \Loom\File($path);
+        $file    = \Loom\File::fromPath($path);
         $content = "abc";
 
         touch($path);
@@ -43,7 +44,7 @@ class WriteTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($file->write());
 
         unset($file);
-        $file = new \Loom\File($path);
+        $file = \Loom\File::fromPath($path);
         $file->read();
 
         $this->assertEquals($content, $file->getContent());
@@ -57,6 +58,7 @@ class WriteTest extends \PHPUnit_Framework_TestCase
      * Test writing to a file that exists but is not writable
      *
      * @test
+     * @covers \Loom\File::write
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-29
      * @access public
@@ -65,7 +67,7 @@ class WriteTest extends \PHPUnit_Framework_TestCase
     public function testNotReadable()
     {
         $path    = __DIR__ . "/somedir/some-not-writable-file.txt";
-        $file    = new \Loom\File($path);
+        $file    = \Loom\File::fromPath($path);
         $content = "abc";
 
         touch($path);
@@ -76,7 +78,7 @@ class WriteTest extends \PHPUnit_Framework_TestCase
 
         unset($file);
         chmod($path, 0755);
-        $file = new \Loom\File($path);
+        $file = \Loom\File::fromPath($path);
         $file->read();
 
         $this->assertEmpty($file->getContent());
@@ -90,6 +92,7 @@ class WriteTest extends \PHPUnit_Framework_TestCase
      * Test writing to a file that does not exist
      *
      * @test
+     * @covers \Loom\File::write
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-29
      * @access public
@@ -98,7 +101,7 @@ class WriteTest extends \PHPUnit_Framework_TestCase
     public function testNonExistent()
     {
         $path    = __DIR__ . "/somedir/some-file-that-does-not-exist.txt";
-        $file    = new \Loom\File($path);
+        $file    = \Loom\File::fromPath($path);
         $content = "abc";
 
         $file->setContent($content);

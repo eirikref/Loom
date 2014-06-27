@@ -77,7 +77,7 @@ class IsReadableTest extends \PHPUnit_Framework_TestCase
     {
         chmod($this->path, 0644);
 
-        $file = new \Loom\File($this->path);
+        $file = \Loom\File::fromPath($this->path);
         $this->assertTrue($file->isReadable());
     }
 
@@ -97,7 +97,7 @@ class IsReadableTest extends \PHPUnit_Framework_TestCase
     {
         chmod($this->path, 0000);
 
-        $file = new \Loom\File($this->path);
+        $file = \Loom\File::fromPath($this->path);
         $this->assertFalse($file->isReadable());
     }
 }

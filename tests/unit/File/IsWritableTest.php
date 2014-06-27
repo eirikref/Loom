@@ -77,7 +77,7 @@ class IsWritableTest extends \PHPUnit_Framework_TestCase
     {
         chmod($this->path, 0744);
 
-        $file = new \Loom\File($this->path);
+        $file = \Loom\File::fromPath($this->path);
         $this->assertTrue($file->isWritable());
     }
 
@@ -97,7 +97,7 @@ class IsWritableTest extends \PHPUnit_Framework_TestCase
     {
         chmod($this->path, 0000);
 
-        $file = new \Loom\File($this->path);
+        $file = \Loom\File::fromPath($this->path);
         $this->assertFalse($file->isWritable());
     }
 }

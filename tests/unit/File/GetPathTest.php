@@ -92,7 +92,7 @@ class GetPathTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithValidPaths($path)
     {
-        $file = new \Loom\File($path);
+        $file = \Loom\File::fromPath($path);
         $this->assertEquals($path, $file->getPath());
     }
 }

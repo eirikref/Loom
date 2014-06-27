@@ -30,7 +30,7 @@ class ExistsTest extends \PHPUnit_Framework_TestCase
     public function testFileThatExists()
     {
         $path = __DIR__ . "/somedir/somefile.txt";
-        $file = new \Loom\File($path);
+        $file = \Loom\File::fromPath($path);
         $this->assertTrue($file->exists());
     }
 
@@ -49,7 +49,7 @@ class ExistsTest extends \PHPUnit_Framework_TestCase
     public function testFileThatDoesNotExist()
     {
         $path = __DIR__ . "/somedir/someotherfile.txt";
-        $file = new \Loom\File($path);
+        $file = \Loom\File::fromPath($path);
         $this->assertFalse($file->exists());
     }
 }

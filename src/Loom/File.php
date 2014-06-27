@@ -37,30 +37,64 @@ class File
 
 
     /**
-     * Constructor
+     * De facto constructor
      *
+     * @static
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-05-14
+     * @since  2014-05-31
      * @access public
      * @return void
      *
      * @param  string $path The file path
      */
-    public function __construct($path = null)
+    public static function fromPath($path)
     {
-        if ($path) {
-            $this->setPath($path);
+        if ($path && self::validatePath($path)) {
+            $file = new \Loom\File();
+            $file->setPath($path);
+
+            return $file;
         }
+
+        return null;
+    }
+
+
+
+    /**
+     * Validate path
+     *
+     * Obviously not nearly done. More of a placeholder in order to
+     * allow for checking paths later on.
+     *
+     * FIXME: Should probably not allow just about anything? Check to
+     * see that the path actually points to a file (ie. not a dir,
+     * what about symlinks?). And probably within allowed dirs?
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-06-26
+     * @access public
+     * @return bool
+     *
+     * @param  string $path The file path
+     */
+    private static function validatePath($path)
+    {
+        $valid = false;
+
+        if (!is_string($path) || empty($path)) {
+            $valid = false;
+        } else {
+            $valid = true;
+        }
+
+        return $valid;
     }
 
 
 
     /**
      * Set path
-     *
-     * FIXME: Should probably not allow just about anything? Check to
-     * see that the path actually points to a file (ie. not a dir,
-     * what about symlinks?). And probably within allowed dirs?
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-15
@@ -69,7 +103,7 @@ class File
      *
      * @param  string $path The file path
      */
-    public function setPath($path)
+    private function setPath($path)
     {
         if (!is_string($path) || empty($path)) {
             return false;
