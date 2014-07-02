@@ -12,7 +12,7 @@ namespace Loom;
  * Class representing a generic file on a file system
  *
  * @package Loom
- * @version 2014-05-28
+ * @version 2014-06-27
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class File
@@ -71,9 +71,10 @@ class File
      * see that the path actually points to a file (ie. not a dir,
      * what about symlinks?). And probably within allowed dirs?
      *
+     * @static
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-06-26
-     * @access public
+     * @access private
      * @return bool
      *
      * @param  string $path The file path
@@ -98,7 +99,7 @@ class File
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-05-15
-     * @access public
+     * @access private
      * @return bool
      *
      * @param  string $path The file path
