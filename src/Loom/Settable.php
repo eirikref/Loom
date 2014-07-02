@@ -23,9 +23,9 @@ class Settable
      * Array containing data
      *
      * @var    array $data
-     * @access private
+     * @access protected
      */
-    private $data = array();
+    protected $data = array();
 
     /**
      * Delimiter for supporting multi-level keys, ie. "config.db.mysql.host"
