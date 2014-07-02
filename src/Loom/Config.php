@@ -25,17 +25,7 @@ class Config extends \Loom\Settable
 {
 
     /**
-     * Is the config instance ready or not?
-     *
-     * @var    bool $ready
-     * @access private
-     */
-    private $ready = true;
-
-
-
-    /**
-     * Initialize from YAML
+     * Constructor
      *
      * @static
      * @author Eirik Refsdal <eirikref@gmail.com>
@@ -43,22 +33,50 @@ class Config extends \Loom\Settable
      * @access public
      * @return void
      *
-     * @param  mixed $file File object or file path to config file
+     * @param  array $data Array of data used to populate config object
      */
-    public static function fromYaml($file)
+    public function __construct(array $data = null)
     {
-        if (!((is_string($file) && !empty($file)) || $file instanceof \Loom\File)) {
+        if (is_array($data) && count($data) > 0) {
+            $this->data = $data;
+        }
+    }
+
+
+
+    /**
+     * Initialize from YAML
+     *
+     * FIXME: I don't really like the silenting @ in front of
+     * yaml_parse_file(), but it seems it is not otherwise quitely
+     * returning the expected failure value.
+     *
+     * @static
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-07-01
+     * @access public
+     * @return void
+     *
+     * @param  mixed $input File object or file path to config file
+     */
+    public static function fromYaml($input)
+    {
+        if (!(extension_loaded("yaml"))) {
+            // Log error message here
             return null;
         }
 
-        if ($file instanceof \Loom\File) {
-            $path = $file->getPath();
-        } else {
-            $path = $file;
-        }
-
-        // yaml_parse_file($path);
+        $file = static::getReadableFile($input);
         
+        if ($file instanceof \Loom\File) {
+            $arr = @yaml_parse_file($file->getPath());
+
+            if (is_array($arr)) {
+                return new \Loom\Config($arr);
+            }
+        }
+        
+        return null;
     }
 
 
@@ -66,68 +84,62 @@ class Config extends \Loom\Settable
     /**
      * Initialize from .ini
      *
+     * FIXME: I don't really like the silenting @ in front of
+     * parse_ini_file(), but it seems it is not otherwise quitely
+     * returning the expected failure value.
+     *
      * @static
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-07-01
      * @access public
      * @return void
      *
-     * @param  mixed $file File object or file path to config file
+     * @param  mixed $input File object or file path to config file
      */
-    public static function fromIni($file)
+    public static function fromIni($input)
     {
-        if (!((is_string($file) && !empty($file)) || $file instanceof \Loom\File)) {
-            return null;
-        }
-
-        if ($file instanceof \Loom\File) {
-            $path = $file->getPath();
-        } else {
-            $path = $file;
-        }
-
-        parse_ini_file($path);
+        $file = static::getReadableFile($input);
         
+        if ($file instanceof \Loom\File) {
+            $arr = @parse_ini_file($file->getPath());
+
+            if (is_array($arr)) {
+                return new \Loom\Config($arr);
+            }
+        }
+        
+        return null;
     }
 
 
 
-    /* private function read($input) */
-    /* { */
-    /*     $file = null; */
-
-    /*     if ($input instanceof \Loom\File) { */
-    /*         $file = $input; */
-    /*     } elseif (is_string($input)) { */
-    /*         $file = new \Loom\File($input); */
-    /*     } */
-
-    /*     if (!(isset($file) && $file->isReadable())) { */
-    /*         // handle something */
-    /*         // Log error */
-    /*         return false; */
-    /*     } */
-
-    /*     switch ($file->getExtension()) { */
-    /*         case 'yaml': */
-    /*             $this->readYaml($file); */
-    /*             break; */
-
-    /*         /\* case 'ini': *\/ */
-    /*         /\*     $this->readIni($file); *\/ */
-    /*         /\*     break; *\/ */
-
-    /*         default: */
-    /*             break; */
-    /*     } */
-    /* } */
-
-    /* private function readYaml($file) */
-    /* { */
-    /* } */
-    
-    private function isReady()
+    /**
+     * Common checking and handling for all the static factory methods
+     *
+     * @static
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-07-01
+     * @access private
+     * @return void
+     *
+     * @param  mixed $input File object or file path to config file
+     */
+    private static function getReadableFile($input)
     {
-        return $this->ready;
+        if (!((is_string($input) && !empty($input)) || $input instanceof \Loom\File)) {
+            return null;
+        }
+
+        if (is_string($input)) {
+            $file = \Loom\File::fromPath($input);
+        } else {
+            $file = $input;
+        }
+
+        if ($file->exists() && $file->isReadable()) {
+            return $file;
+        }
+
+        return null;
     }
 }
