@@ -11,7 +11,7 @@ namespace Loom\Tests\Unit\Config;
  *
  * @package    Loom
  * @subpackage Tests
- * @version    2014-07-01
+ * @version    2014-07-02
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
 class FromIniTest extends \PHPUnit_Framework_TestCase
@@ -55,55 +55,118 @@ class FromIniTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithInvalidPaths($path)
     {
-        /* $class  = $this->getMock("\Loom\File"); */
-        /* $method = new \ReflectionMethod($class, "validatePath"); */
-        /* $method->setAccessible(true); */
-
-        /* $result = $method->invoke($class, $path); */
-        /* $this->assertFalse($result); */
         $this->assertNull(\Loom\Config::fromIni($path));
     }
 
 
 
-    /* /\** */
-    /*  * Data provider with all kinds of valid paths */
-    /*  * */
-    /*  * @author Eirik Refsdal <eirikref@gmail.com> */
-    /*  * @since  2014-06-27 */
-    /*  * @access public */
-    /*  * @return array */
-    /*  *\/ */
-    /* public function getValidPaths() */
-    /* { */
-    /*     return array( */
-    /*         array("/some/path"), */
-    /*         array("/usr/local/something"), */
-    /*         array("/anything"), */
-    /*         array("file.txt"), */
-    /*     ); */
-    /* } */
+    /**
+     * Data provider with all kinds of valid, but non-existent, paths
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-07-01
+     * @access public
+     * @return array
+     */
+    public function getValidButNonExistentPaths()
+    {
+        return array(
+            array("/some/path"),
+            array("/usr/local/something"),
+            array("/anything"),
+            array("file.txt"),
+        );
+    }
 
 
 
-    /* /\** */
-    /*  * Test validatePath() using valid path value */
-    /*  * */
-    /*  * @test */
-    /*  * @dataProvider getValidPaths */
-    /*  * @covers       \Loom\File::validatePath */
-    /*  * @author       Eirik Refsdal <eirikref@gmail.com> */
-    /*  * @since        2014-06-27 */
-    /*  * @access       public */
-    /*  * @return       void */
-    /*  *\/ */
-    /* public function testWithValidPaths($path) */
-    /* { */
-    /*     $class  = $this->getMock("\Loom\File"); */
-    /*     $method = new \ReflectionMethod($class, "validatePath"); */
-    /*     $method->setAccessible(true); */
+    /**
+     * Test fromIni() using valid, but non-existent, paths
+     *
+     * @test
+     * @dataProvider getValidButNonExistentPaths
+     * @covers       \Loom\Config::fromIni
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2014-07-01
+     * @access       public
+     * @return       void
+     */
+    public function testWithValidButNonExistentPaths($path)
+    {
+        $this->assertNull(\Loom\Config::fromIni($path));
+    }
 
-    /*     $result = $method->invoke($class, $path); */
-    /*     $this->assertTrue($result); */
-    /* } */
+
+
+    /**
+     * Data provider with valid paths that do exist
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-07-01
+     * @access public
+     * @return array
+     */
+    public function getValidPaths()
+    {
+        return array(
+            array("tests/unit/Config/data/simple.ini"),
+        );
+    }
+
+
+
+    /**
+     * Test fromIni() using valid paths
+     *
+     * @test
+     * @dataProvider getValidPaths
+     * @covers       \Loom\Config::fromIni
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2014-07-01
+     * @access       public
+     * @return       void
+     */
+    public function testWithValidPaths($path)
+    {
+        $res = \Loom\Config::fromIni($path);
+        $this->assertTrue($res instanceof \Loom\Config);
+    }
+
+
+
+    /**
+     * Test fromIni() using valid paths as File objects
+     *
+     * @test
+     * @dataProvider getValidPaths
+     * @covers       \Loom\Config::fromIni
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2014-07-01
+     * @access       public
+     * @return       void
+     */
+    public function testWithValidPathsAsFileObjects($path)
+    {
+        $file = \Loom\File::fromPath($path);
+        $res  = \Loom\Config::fromIni($file);
+        $this->assertTrue($res instanceof \Loom\Config);
+    }
+
+
+
+    /**
+     * Test fromIni() using valid path, but file with invalid content
+     *
+     * @test
+     * @covers \Loom\Config::fromIni
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-07-02
+     * @access public
+     * @return void
+     */
+    public function testInvalidContent()
+    {
+        $path = "tests/unit/Config/data/invalid.ini";
+        \Loom\Config::fromIni($path);
+    }
 }

@@ -7,7 +7,7 @@
 namespace Loom\Tests\Unit\Config;
 
 /**
- * Loom: Unit tests for Config::validatePath()
+ * Loom: Unit tests for Config::fromYaml()
  *
  * @package    Loom
  * @subpackage Tests
@@ -55,55 +55,126 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithInvalidPaths($path)
     {
-        /* $class  = $this->getMock("\Loom\File"); */
-        /* $method = new \ReflectionMethod($class, "validatePath"); */
-        /* $method->setAccessible(true); */
-
-        /* $result = $method->invoke($class, $path); */
-        /* $this->assertFalse($result); */
         $this->assertNull(\Loom\Config::fromYaml($path));
     }
 
 
 
-    /* /\** */
-    /*  * Data provider with all kinds of valid paths */
-    /*  * */
-    /*  * @author Eirik Refsdal <eirikref@gmail.com> */
-    /*  * @since  2014-06-27 */
-    /*  * @access public */
-    /*  * @return array */
-    /*  *\/ */
-    /* public function getValidPaths() */
-    /* { */
-    /*     return array( */
-    /*         array("/some/path"), */
-    /*         array("/usr/local/something"), */
-    /*         array("/anything"), */
-    /*         array("file.txt"), */
-    /*     ); */
-    /* } */
+    /**
+     * Data provider with all kinds of valid, but non-existent, paths
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-07-01
+     * @access public
+     * @return array
+     */
+    public function getValidButNonExistentPaths()
+    {
+        return array(
+            array("/some/path"),
+            array("/usr/local/something"),
+            array("/anything"),
+            array("file.txt"),
+        );
+    }
 
 
 
-    /* /\** */
-    /*  * Test validatePath() using valid path value */
-    /*  * */
-    /*  * @test */
-    /*  * @dataProvider getValidPaths */
-    /*  * @covers       \Loom\File::validatePath */
-    /*  * @author       Eirik Refsdal <eirikref@gmail.com> */
-    /*  * @since        2014-06-27 */
-    /*  * @access       public */
-    /*  * @return       void */
-    /*  *\/ */
-    /* public function testWithValidPaths($path) */
-    /* { */
-    /*     $class  = $this->getMock("\Loom\File"); */
-    /*     $method = new \ReflectionMethod($class, "validatePath"); */
-    /*     $method->setAccessible(true); */
+    /**
+     * Test fromYaml() using valid, but non-existent, paths
+     *
+     * @test
+     * @dataProvider getValidButNonExistentPaths
+     * @covers       \Loom\Config::fromYaml
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2014-07-01
+     * @access       public
+     * @return       void
+     */
+    public function testWithValidButNonExistentPaths($path)
+    {
+        $this->assertNull(\Loom\Config::fromYaml($path));
+    }
 
-    /*     $result = $method->invoke($class, $path); */
-    /*     $this->assertTrue($result); */
-    /* } */
+
+
+    /**
+     * Data provider with valid paths that do exist
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-07-01
+     * @access public
+     * @return array
+     */
+    public function getValidPaths()
+    {
+        return array(
+            array("tests/unit/Config/data/simple.yaml"),
+        );
+    }
+
+
+
+    /**
+     * Test fromYaml() using valid paths
+     *
+     * @test
+     * @dataProvider getValidPaths
+     * @covers       \Loom\Config::fromYaml
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2014-07-01
+     * @access       public
+     * @return       void
+     */
+    public function testWithValidPaths($path)
+    {
+        if (!extension_loaded("yaml")) {
+            return;
+        }
+
+        $res = \Loom\Config::fromYaml($path);
+        $this->assertTrue($res instanceof \Loom\Config);
+    }
+
+
+
+    /**
+     * Test fromYaml() using valid paths as File objects
+     *
+     * @test
+     * @dataProvider getValidPaths
+     * @covers       \Loom\Config::fromYaml
+     * @author       Eirik Refsdal <eirikref@gmail.com>
+     * @since        2014-07-01
+     * @access       public
+     * @return       void
+     */
+    public function testWithValidPathsAsFileObjects($path)
+    {
+        if (!extension_loaded("yaml")) {
+            return;
+        }
+
+        $file = \Loom\File::fromPath($path);
+        $res  = \Loom\Config::fromYaml($file);
+        $this->assertTrue($res instanceof \Loom\Config);
+    }
+
+
+
+    /**
+     * Test fromYaml() using valid path, but file with invalid content
+     *
+     * @test
+     * @covers \Loom\Config::fromYaml
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-07-02
+     * @access public
+     * @return void
+     */
+    public function testInvalidContent()
+    {
+        $path = "tests/unit/Config/data/invalid.yaml";
+        \Loom\Config::fromYaml($path);
+    }
 }
