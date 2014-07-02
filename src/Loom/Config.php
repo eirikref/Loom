@@ -61,18 +61,15 @@ class Config extends \Loom\Settable
      */
     public static function fromYaml($input)
     {
-        if (!(extension_loaded("yaml"))) {
-            // Log error message here
-            return null;
-        }
-
-        $file = static::getReadableFile($input);
-        
-        if ($file instanceof \Loom\File) {
-            $arr = @yaml_parse_file($file->getPath());
-
-            if (is_array($arr)) {
-                return new \Loom\Config($arr);
+        if (extension_loaded("yaml")) {
+            $file = static::getReadableFile($input);
+            
+            if ($file instanceof \Loom\File) {
+                $arr = @yaml_parse_file($file->getPath());
+                
+                if (is_array($arr)) {
+                    return new \Loom\Config($arr);
+                }
             }
         }
         
