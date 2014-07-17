@@ -1,6 +1,6 @@
 PHPUNIT=./vendor/bin/phpunit
 PHPCS=./vendor/bin/phpcs
-PHPDOC=./vendor/bin/phpdoc.php
+PHPDOC=./vendor/bin/phpdoc
 PHPMD=./vendor/bin/phpmd
 
 all: sniff test doc
