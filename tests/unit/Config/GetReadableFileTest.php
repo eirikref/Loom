@@ -138,7 +138,7 @@ class GetReadableFileTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithValidPaths($path)
     {
-       $class  = $this->getMock("\Loom\Config");
+        $class  = $this->getMock("\Loom\Config");
         $method = new \ReflectionMethod($class, "getReadableFile");
         $method->setAccessible(true);
 
