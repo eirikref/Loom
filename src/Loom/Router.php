@@ -19,8 +19,26 @@ namespace Loom;
 class Router
 {
 
+    /**
+     * Routes
+     *
+     * @var    string $content
+     * @access private
+     */
     private $routes;
 
+
+
+    /**
+     * Constructor
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-07-17
+     * @access private
+     * @return object \Loom\Router object
+     *
+     * @param  array $data Array of routes
+     */
     private function __construct($data)
     {
         $this->routes = $data;
@@ -54,6 +72,18 @@ class Router
         return null;
     }
 
+
+
+    /**
+     * Match route. TBI.
+     *
+     * @author Eirik Refsdal <eirikref@gmail.com>
+     * @since  2014-07-17
+     * @access public
+     * @return ?
+     *
+     * @param  ?
+     */
     public function match($something)
     {
     }
