@@ -22,7 +22,7 @@ class Router
     /**
      * Routes
      *
-     * @var    string $content
+     * @var    array $routes
      * @access private
      */
     private $routes;
@@ -39,7 +39,7 @@ class Router
      *
      * @param  array $data Array of routes
      */
-    private function __construct($data)
+    private function __construct(array $data)
     {
         $this->routes = $data;
     }
@@ -61,11 +61,12 @@ class Router
     {
         if (extension_loaded("yaml")) {
             if ($file->exists() and $file->isReadable()) {
-                $data = parse_yaml_file($file->getPath());
+                $data = @yaml_parse_file($file->getPath());
 
-                $router = new \Loom\Router($data);
-                
-                return $router;
+                if (is_array($data) && count($data) > 0) {
+                    $router = new \Loom\Router($data);
+                    return $router;
+                }
             }
         }
 
