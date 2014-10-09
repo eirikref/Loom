@@ -28,7 +28,7 @@ class HttpRequestManager
     {
     }
     
-    public function empty()
+    public function reset()
     {
     }
 }
