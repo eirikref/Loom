@@ -27,7 +27,6 @@ class Config extends \Loom\Settable
     /**
      * Constructor
      *
-     * @static
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-07-01
      * @access public
