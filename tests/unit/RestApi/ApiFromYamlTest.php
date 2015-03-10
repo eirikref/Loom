@@ -4,24 +4,24 @@
  * Copyright (c) 2014 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Loom\Tests\Unit\Router;
+namespace Loom\Tests\Unit\RestApi;
 
 /**
- * Loom: Unit tests for Router::fromYaml()
+ * Loom: Unit tests for RestApi::fromYaml()
  *
  * @package    Loom
  * @subpackage Tests
  * @version    2014-07-17
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class FromYamlTest extends \PHPUnit_Framework_TestCase
+class ApiFromYamlTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Test Router::fromYaml() with a non-existent file
+     * Test RestApi::fromYaml() with a non-existent file
      *
      * @test
-     * @covers \Loom\Router::fromYaml
+     * @covers \Loom\RestApi::fromYaml
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-07-17
      * @access public
@@ -29,9 +29,9 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromYamlWithNonExistentFile()
     {
-        $path   = "./tests/unit/Router/files/nosuchfile.yaml";
+        $path   = "./tests/unit/RestApi/files/nosuchfile.yaml";
         $file   = \Loom\File::fromPath($path);
-        $router = \Loom\Router::fromYaml($file);
+        $router = \Loom\RestApi::fromYaml($file);
 
         $this->assertNull($router);
     }
@@ -39,10 +39,10 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test Router::fromYaml() with an empty file
+     * Test RestApi::fromYaml() with an empty file
      *
      * @test
-     * @covers \Loom\Router::fromYaml
+     * @covers \Loom\RestApi::fromYaml
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-07-22
      * @access public
@@ -50,9 +50,9 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromYamlWithEmptyFile()
     {
-        $path   = "./tests/unit/Router/files/empty.yaml";
+        $path   = "./tests/unit/RestApi/files/empty.yaml";
         $file   = \Loom\File::fromPath($path);
-        $router = \Loom\Router::fromYaml($file);
+        $router = \Loom\RestApi::fromYaml($file);
 
         $this->assertNull($router);
     }
@@ -60,7 +60,7 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test Router::fromYaml() with a valid file
+     * Test RestApi::fromYaml() with a valid file
      *
      * @test
      * @author Eirik Refsdal <eirikref@gmail.com>
@@ -70,10 +70,10 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testFromYamlWithValidFile()
     {
-        $path   = "./tests/unit/Router/files/valid.yaml";
+        $path   = "./tests/unit/RestApi/files/valid.yaml";
         $file   = \Loom\File::fromPath($path);
-        $router = \Loom\Router::fromYaml($file);
+        $router = \Loom\RestApi::fromYaml($file);
 
-        $this->assertTrue($router instanceof \Loom\Router);
+        $this->assertTrue($router instanceof \Loom\RestApi);
     }
 }

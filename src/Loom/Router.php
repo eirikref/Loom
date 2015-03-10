@@ -39,9 +39,13 @@ class Router
      *
      * @param  array $data Array of routes
      */
-    private function __construct(array $data)
+    private function __construct(array $data, $prefix = null)
     {
         $this->routes = $data;
+
+        if ($prefix) {
+            $this->prefix = $prefix;
+        }
     }
 
 
@@ -57,14 +61,14 @@ class Router
      *
      * @param  object $file A \Loom\File object
      */
-    public static function fromYaml(\Loom\File $file)
+    public static function fromYaml(\Loom\File $file, $prefix = null)
     {
         if (extension_loaded("yaml")) {
             if ($file->exists() and $file->isReadable()) {
                 $data = @yaml_parse_file($file->getPath());
 
                 if (is_array($data) && count($data) > 0) {
-                    $router = new \Loom\Router($data);
+                    $router = new \Loom\Router($data, $prefix);
                     return $router;
                 }
             }
@@ -85,7 +89,8 @@ class Router
      *
      * @param  ?
      */
-    public function match($something)
+    public function match($url, $method = "get")
     {
+        
     }
 }
