@@ -10,7 +10,7 @@ namespace Loom;
  * Loom: Router
  *
  * - Decide on YAML format
- * - 
+ * -
  *
  * @package Loom
  * @version 2014-07-17

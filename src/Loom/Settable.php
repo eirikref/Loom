@@ -121,7 +121,7 @@ class Settable
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2013-06-20
      * @access public
-     * @return mixed 
+     * @return mixed
      *
      * @param  string $key  The variable name
      * @param  string $type Set for strict type checking

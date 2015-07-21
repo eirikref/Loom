@@ -1,5 +1,6 @@
 PHPUNIT=./vendor/bin/phpunit
 PHPCS=./vendor/bin/phpcs
+PHPCBF=./vendor/bin/phpcbf
 PHPDOC=./vendor/bin/phpdoc
 PHPMD=./vendor/bin/phpmd
 
@@ -10,7 +11,8 @@ test:
 	$(PHPUNIT) --coverage-html ./build/coverage
 
 sniff:
-	$(PHPCS) --standard=PSR2 ./src ./tests
+	# $(PHPCS) --standard=PSR2 ./src ./tests
+	$(PHPCBF) --standard=PSR2 ./src ./tests
 
 doc:
 	@rm -rf ./build/phpdoc

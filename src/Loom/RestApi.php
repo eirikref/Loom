@@ -18,4 +18,11 @@ namespace Loom;
 class RestApi
 {
 
+    function __construct()
+    {
+    }
+    
+    static function fromYaml()
+    {
+    }
 }
