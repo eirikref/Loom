@@ -1,7 +1,7 @@
 <?php
 /**
  * Loom: Router
- * Copyright (c) 2013-2014 Eirik Refsdal <eirikref@gmail.com>
+ * Copyright (c) 2013-2015 Eirik Refsdal <eirikref@gmail.com>
  */
 
 namespace Loom;
@@ -13,7 +13,7 @@ namespace Loom;
  * -
  *
  * @package Loom
- * @version 2014-07-17
+ * @version 2015-07-23
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
 class Router
@@ -27,6 +27,14 @@ class Router
      */
     private $routes;
 
+    /**
+     * Prefix
+     *
+     * @var    FIXME $prefix
+     * @access private
+     */
+    private $prefix;
+
 
 
     /**
@@ -38,6 +46,7 @@ class Router
      * @return object \Loom\Router object
      *
      * @param  array $data Array of routes
+     * @param  FIXME $prefix FIXME
      */
     private function __construct(array $data, $prefix = null)
     {
@@ -60,6 +69,7 @@ class Router
      * @return mixed \Loom\Router or null
      *
      * @param  object $file A \Loom\File object
+     * @param  FIXME $prefix FIXME
      */
     public static function fromYaml(\Loom\File $file, $prefix = null)
     {
@@ -87,7 +97,8 @@ class Router
      * @access public
      * @return ?
      *
-     * @param  ?
+     * @param  FIXME $url FIXME
+     * @param  FIXME $method FIXME
      */
     public function match($url, $method = "get")
     {
