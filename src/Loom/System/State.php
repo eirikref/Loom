@@ -29,32 +29,32 @@ class State
         return self::$instance;
     }
 
-    public function setConfig($config instanceof \Loom\System\Config)
+    public function setConfig(\Loom\System\Config $config)
     {
         $this->config = $config;
     }
 
-    public function setTemplate($template instanceof \Loom\Template)
+    public function setTemplate(\Loom\Template $template)
     {
         $this->template = $template;
     }
 
-    public function setUrl($url instanceof \Loom\Url)
+    public function setUrl(\Loom\Url $url)
     {
         $this->url = $url;
     }
 
-    public function setRouter($router instanceof \Loom\Router)
+    public function setRouter(\Loom\Router $router)
     {
         $this->router = $router;
     }
 
-    public function setPage($page instanceof \Loom\System\Page)
+    public function setPage(\Loom\System\Page $page)
     {
         $this->page = $page;
     }
 
-    public function setUser($user instanceof \Loom\User)
+    public function setUser(\Loom\User $user)
     {
         $this->user = $user;
     }
