@@ -4,18 +4,18 @@
  * Copyright (c) 2016 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Loom;
+namespace Loom\DataStore;
 
 /**
- * Loom: Database
+ * Loom: DataStore\Mysql
  *
- * Simple class for handling database connections.
+ * Simple class for handling database connections with MySQL.
  *
  * @package Loom
  * @version 2016-09-05
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-class Database
+class Mysql implements \Loom\DataStore
 {
     
     /**
