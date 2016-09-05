@@ -8,12 +8,26 @@ namespace Loom\System;
 class State
 {
 
+    protected $instance;
     protected $config;
     protected $template;
     protected $url;
     protected $router;
     protected $page;
     protected $user;
+
+    private function __construct()
+    {
+    }
+    
+    public static function &getInstance()
+    {
+        if (null === self::$instance) {
+            self::$instance = new \Loom\System\State();
+        }
+        
+        return self::$instance;
+    }
 
     public function setConfig($config instanceof \Loom\System\Config)
     {
