@@ -4,7 +4,7 @@
  * Copyright (c) 2014 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Loom;
+namespace Loom\Config;
 
 /**
  * Loom: Config
@@ -47,7 +47,7 @@ class Config extends \Loom\Settable
     /**
      * Initialize from YAML
      *
-     * FIXME: I don't really like the silenting @ in front of
+     * FIXME: I don't really like the silencing @ in front of
      * yaml_parse_file(), but it seems it is not otherwise quitely
      * returning the expected failure value.
      *
