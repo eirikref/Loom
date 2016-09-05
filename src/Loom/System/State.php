@@ -8,8 +8,9 @@ namespace Loom\System;
 class State
 {
 
-    protected $instance;
+    protected static $instance;
     protected $config;
+    protected $datastore;
     protected $template;
     protected $url;
     protected $router;
@@ -32,6 +33,11 @@ class State
     public function setConfig(\Loom\System\Config $config)
     {
         $this->config = $config;
+    }
+
+    public function setDataStore(\Loom\DataStore $datastore)
+    {
+        $this->datastore = $datastore;
     }
 
     public function setTemplate(\Loom\Template $template)
