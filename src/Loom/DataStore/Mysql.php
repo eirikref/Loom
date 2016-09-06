@@ -29,8 +29,8 @@ class Mysql implements \Loom\DataStore
      * @var    array
      * @access protected
      */
-    protected $params = array("host", "user", "pass", "db");
-
+    protected $validParams = array("host", "user", "pass", "db");
+    protected $config = array();
 
 
     /**
@@ -45,8 +45,15 @@ class Mysql implements \Loom\DataStore
     /**
      * Configure connection
      */
-    public function configure()
+    public function configure(array $config)
     {
+        empty($this->config);
+
+        foreach ($config as $key => $val) {
+            if (is_string($key) && in_array($key, $this->validParams)) {
+                $this->config[$key] = $val;
+            }
+        }
     }
 
 
@@ -56,8 +63,17 @@ class Mysql implements \Loom\DataStore
      */
     public function connect()
     {
-    }
+        $dsn = sprintf("mysql:host=%s;dbname=%s",
+                       $this->config["host"], $this->config["db"]);
 
+        try {
+            $this->dbh = new \PDO($dsn, $this->config["user"], $this->config["pass"]);
+        } catch (\PDOException $e) {
+            echo "error error: " . $e->getMessage();
+        }
+        
+    }
+    
 
 
     /**
@@ -65,6 +81,7 @@ class Mysql implements \Loom\DataStore
      */
     public function disconnect()
     {
+        $this->dbh = null;
     }
 
 
@@ -72,8 +89,18 @@ class Mysql implements \Loom\DataStore
     /**
      * Query
      */
-    public function query()
+    public function query($query, $args)
     {
+        if (!$this->dbh) {
+            return false;
+        }
+
+        $sth = $this->dbh->prepare($query, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
+        $sth->execute($args);
+
+        // var_dump($sth->errorInfo());
+        
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 }

@@ -34,9 +34,13 @@ class Template
         ));
     }
 
-    public function render($tpl)
+    public function render($tpl, array $args = null)
     {
-        $html = $this->twig->render($tpl);
+        $state = \Loom\System\State::getInstance();
+        $args["state"] = $state;
+        $args["user"]  = $state->getUser();
+        
+        $html = $this->twig->render($tpl, $args);
         print $html;
     }
 }

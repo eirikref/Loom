@@ -10,7 +10,7 @@ class State
 
     protected static $instance;
     protected $config;
-    protected $datastore;
+    protected $dataStore;
     protected $template;
     protected $url;
     protected $router;
@@ -35,9 +35,9 @@ class State
         $this->config = $config;
     }
 
-    public function setDataStore(\Loom\DataStore $datastore)
+    public function setDataStore(\Loom\DataStore $dataStore)
     {
-        $this->datastore = $datastore;
+        $this->dataStore = $dataStore;
     }
 
     public function setTemplate(\Loom\Template $template)
@@ -68,6 +68,11 @@ class State
     public function &getConfig()
     {
         return $this->config;
+    }
+
+    public function &getDataStore()
+    {
+        return $this->dataStore;
     }
 
     public function &getTemplate()
