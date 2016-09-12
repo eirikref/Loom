@@ -43,6 +43,21 @@ class Settable
      */
     private $maxKeyLength = 128;
 
+    /**
+     * Model
+     *
+     * @var    object $model
+     * @access protected
+     */
+    protected $model;
+
+    /**
+     * Valid fields
+     *
+     * @var    array $valid
+     * @access protected
+     */
+    protected $valid = array();
 
 
     /**
@@ -309,4 +324,12 @@ class Settable
 
         return $isValid;
     }
+
+    public function setData(array $data)
+    {
+        foreach ($data as $key => $val) {
+            $this->set($key, $val);
+        }
+    }
+
 }

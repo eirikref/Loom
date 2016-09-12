@@ -4,7 +4,7 @@
  * Copyright (c) 2014 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Loom\Config;
+namespace Loom\System;
 
 /**
  * Loom: Config

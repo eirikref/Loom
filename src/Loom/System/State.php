@@ -16,6 +16,7 @@ class State
     protected $router;
     protected $page;
     protected $user;
+    protected $breadcrumbs;
 
     private function __construct()
     {
@@ -98,6 +99,16 @@ class State
     public function &getUser()
     {
         return $this->user;
+    }
+
+    public function setBreadcrumbs(\Loom\Breadcrumbs $bc)
+    {
+        $this->breadcrumbs = $bc;
+    }
+
+    public function &getBreadcrumbs()
+    {
+        return $this->breadcrumbs;
     }
 
 }

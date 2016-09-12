@@ -23,15 +23,34 @@ class Template
     // }
 
     
-    public function __construct()
+    public function __construct(array $config)
     {
+        if (!($this->validateConfig($config))) {
+            return;
+        }
+
+        $templateDir = $config["templateDir"];
+        
         require_once "vendor/twig/twig/lib/Twig/Autoloader.php";
         \Twig_Autoloader::register();
-        
-        $this->loader = new \Twig_Loader_Filesystem("/Users/eirikref/projects/contentmagic/src/templates");
+
+        $this->loader = new \Twig_Loader_Filesystem($templateDir);
         $this->twig = new \Twig_Environment($this->loader, array(
             // "cache" => "/Users/eirikref/projects/contentmagic/var/cache",
         ));
+    }
+
+    private function validateConfig(array $config)
+    {
+        if (!(isset($config["templateDir"]))) {
+            return false;
+        }
+
+        if (!(is_string($config["templateDir"]) || is_array($config["templateDir"]))) {
+            return false;
+        }
+
+        return true;
     }
 
     public function render($tpl, array $args = null)
