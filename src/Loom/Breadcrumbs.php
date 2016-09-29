@@ -30,5 +30,10 @@ class Breadcrumbs
     {
         return $this->data;
     }
-    
+
+    public function reset()
+    {
+        $this->data = [];
+    }
+
 }

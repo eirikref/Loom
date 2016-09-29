@@ -6,6 +6,7 @@ class Model extends \Loom\Settable
 {
 
     protected $definition;
+    protected $fields;
 
 
     
@@ -160,7 +161,7 @@ class Model extends \Loom\Settable
 
 
     
-    public function getFields($context)
+    public function initFields($context)
     {
         $state  = \Loom\System\State::getInstance();
         $config = $state->getConfig();
@@ -204,9 +205,13 @@ class Model extends \Loom\Settable
         // print_pre_r($ret);
         // die();
         
-        return $ret;
+        $this->fields = $ret;
     }
 
+    public function getFields()
+    {
+        return $this->fields;
+    }
 
     
     public function setFieldValues($field, array $values)
@@ -230,6 +235,7 @@ class Model extends \Loom\Settable
     public function getField($field)
     {
         if (isset($this->fields[$field])) {
+            // print_pre_r($this->fields[$field]);
             return $this->fields[$field];
         } else {
             return null;

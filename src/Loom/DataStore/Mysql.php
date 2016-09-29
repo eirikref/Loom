@@ -98,7 +98,8 @@ class Mysql implements \Loom\DataStore
         $sth = $this->dbh->prepare($query, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
         $sth->execute($args);
 
-        // var_dump($sth->errorInfo());
+        // error_log(print_r($sth->errorInfo(), true));
+        // print_pre_r($sth->errorInfo(), true);
         
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
