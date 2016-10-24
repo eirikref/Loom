@@ -33,6 +33,11 @@ class Url extends Settable
 
         $this->set("parseurl", parse_url($url));
         $this->set("path", $this->parsePath($this->get("parseurl.path")));
+
+        if ($this->get("parseurl.query")) {
+            parse_str($this->get("parseurl.query"), $params);
+            $this->set("params", $params);
+        }
     }
 
     private function parsePath($in)
@@ -46,17 +51,72 @@ class Url extends Settable
         return explode("/", $in);
     }
 
+    public function getPath()
+    {
+        return $this->get("parseurl.path");
+    }
+
     public function getPathSize()
     {
         return count($this->get("path"));
     }
 
+    // public function getPathElement($i)
+    // {
+    //     if ($i <= $this->getPathSize()) {
+    //         $real = $i - 1;
+    //         return $this->get("path.$real");
+    //     }
+    // }
+
     public function getPathElement($i)
     {
         if ($i <= $this->getPathSize()) {
-            $real = $i - 1;
-            return $this->get("path.$real");
+            return $this->get("path.$i");
         }
     }
-    
+
+    public function getPathElements()
+    {
+        return $this->get("path");
+    }
+
+    public function getPathTo($n)
+    {
+        $path = $this->get("parseurl.path");
+
+        if (!is_int($n)) {
+            return null;
+        }
+        
+        if ($n < 1 || $n > $this->maxLength) {
+            return null;
+        }
+
+        if (strlen($path) < $n) {
+            return null;
+        }
+
+        return substr($path, 0, $n);
+    }        
+
+    public function getParams()
+    {
+        return $this->get("params");
+    }
+
+    public function hasParam($p)
+    {
+        if ($this->get("params.$p")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getParam($p)
+    {
+        return $this->get("params.$p");
+    }
+
 }
