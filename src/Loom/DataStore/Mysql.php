@@ -31,16 +31,36 @@ class Mysql implements \Loom\DataStore
      */
     protected $validParams = array("host", "user", "pass", "db");
     protected $config = array();
+    protected $error = array();
 
 
+    
     /**
      * Constructor
      */
     public function __construct()
     {
+        $this->resetError();
     }
 
 
+    protected function resetError()
+    {
+        $this->error = array("code" => null,
+                             "msg" => null);
+    }
+
+    public function getErrorCode()
+    {
+        return $this->error["code"];
+    }
+
+    public function getErrorMsg()
+    {
+        if (isset($this->error["msg"][2])) {
+            return $this->error["msg"][2];
+        }
+    }
 
     /**
      * Configure connection
@@ -63,15 +83,18 @@ class Mysql implements \Loom\DataStore
      */
     public function connect()
     {
+        $this->resetError();
         $dsn = sprintf("mysql:host=%s;dbname=%s",
                        $this->config["host"], $this->config["db"]);
 
         try {
             $this->dbh = new \PDO($dsn, $this->config["user"], $this->config["pass"]);
         } catch (\PDOException $e) {
-            echo "error error: " . $e->getMessage();
+            $this->error["msg"] = $e->getMessage();
+            return false;
         }
-        
+
+        return true;
     }
     
 
@@ -91,17 +114,28 @@ class Mysql implements \Loom\DataStore
      */
     public function query($query, $args)
     {
+        $this->resetError();
+        
         if (!$this->dbh) {
+            $this->error["msg"] = "No database connection";
             return false;
         }
 
-        $sth = $this->dbh->prepare($query, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
-        $sth->execute($args);
+        $sth = $this->dbh->prepare($query,array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
 
-        // error_log(print_r($sth->errorInfo(), true));
-        // print_pre_r($sth->errorInfo(), true);
-        
-        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+        if (true === $sth->execute($args)) {
+            return $sth->fetchAll(\PDO::FETCH_ASSOC);
+        } else {
+            $this->error["code"] = $sth->errorCode();
+            $this->error["msg"] = $sth->errorInfo();
+
+            return false;
+        }
     }
 
+
+    public function getLastInsertId()
+    {
+        return $this->dbh->lastInsertId();
+    }
 }
