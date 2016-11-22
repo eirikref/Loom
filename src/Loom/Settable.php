@@ -332,4 +332,12 @@ class Settable
         }
     }
 
+    public function has($key)
+    {
+        if (is_string($key) || is_int($key)) {
+            return isset($this->data[$key]);
+        }
+
+        return false;
+    }
 }

@@ -21,13 +21,15 @@ class Resource extends \Loom\Settable
     public function getRequiredParams()
     {
         $ret = array();
-        
-        foreach ($this->get("parameters") as $p) {
-            if (1 == $p["required"]) {
-                $key  = $p["name"];
-                $type = $p["type"];
 
-                $ret[$key] = $type;
+        if ($this->has("parameters")) {
+            foreach ($this->get("parameters") as $p) {
+                if (1 == $p["required"]) {
+                    $key  = $p["name"];
+                    $type = $p["type"];
+                    
+                    $ret[$key] = $type;
+                }
             }
         }
 
