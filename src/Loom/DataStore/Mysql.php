@@ -32,6 +32,7 @@ class Mysql implements \Loom\DataStore
     protected $validParams = array("host", "user", "pass", "db");
     protected $config = array();
     protected $error = array();
+    protected $isReady = false;
 
 
     
@@ -93,7 +94,8 @@ class Mysql implements \Loom\DataStore
             $this->error["msg"] = $e->getMessage();
             return false;
         }
-
+        
+        $this->isReady = true;
         return true;
     }
     
@@ -105,6 +107,7 @@ class Mysql implements \Loom\DataStore
     public function disconnect()
     {
         $this->dbh = null;
+        $this->isReady = false;
     }
 
 
@@ -137,5 +140,10 @@ class Mysql implements \Loom\DataStore
     public function getLastInsertId()
     {
         return $this->dbh->lastInsertId();
+    }
+
+    public function isReady()
+    {
+        return $this->isReady;
     }
 }
