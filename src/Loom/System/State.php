@@ -37,10 +37,12 @@ class State
 
 
     
-    public static function &getInstance()
+    public static function &getInstance($ns = "\Loom\System")
     {
+        $class = $ns . "\State";
+        
         if (null === self::$instance) {
-            self::$instance = new \Loom\System\State();
+            self::$instance = new $class();
         }
         
         return self::$instance;
