@@ -15,7 +15,7 @@ namespace Loom\DataStore;
  * @version 2016-09-05
  * @author  Eirik Refsdal <eirikref@gmail.com>
  */
-class Mysql implements \Loom\DataStore
+class Mysql implements \Loom\DataStore\StorageEngineInterface
 {
     
     /**
@@ -39,9 +39,13 @@ class Mysql implements \Loom\DataStore
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(array $config = null)
     {
         $this->resetError();
+
+        if ($config) {
+            $this->configure($config);
+        }
     }
 
 
@@ -115,7 +119,7 @@ class Mysql implements \Loom\DataStore
     /**
      * Query
      */
-    public function query($query, $args)
+    public function query($query, array $args = null)
     {
         $this->resetError();
         

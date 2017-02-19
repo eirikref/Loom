@@ -15,8 +15,11 @@ namespace Loom;
  */
 class Url extends Settable
 {
+    
     private $maxLength = 4096;
 
+
+    
     public function __construct($url = null)
     {
         if (isset($url)) {
@@ -24,6 +27,8 @@ class Url extends Settable
         }
     }
 
+
+    
     public function setUrl($url)
     {
         if (is_string($url) && strlen($url) <= $this->maxLength) {
@@ -40,6 +45,8 @@ class Url extends Settable
         }
     }
 
+
+    
     private function parsePath($in)
     {
         if (!is_string($in) || strlen($in) > $this->maxLength) {
@@ -51,24 +58,22 @@ class Url extends Settable
         return explode("/", $in);
     }
 
+
+    
     public function getPath()
     {
         return $this->get("parseurl.path");
     }
 
+
+    
     public function getPathSize()
     {
         return count($this->get("path"));
     }
 
-    // public function getPathElement($i)
-    // {
-    //     if ($i <= $this->getPathSize()) {
-    //         $real = $i - 1;
-    //         return $this->get("path.$real");
-    //     }
-    // }
 
+    
     public function getPathElement($i)
     {
         if ($i <= $this->getPathSize()) {
@@ -76,11 +81,22 @@ class Url extends Settable
         }
     }
 
+
+
+    public function getLastElement()
+    {
+        return end($this->get("path"));
+    }
+    
+
+
     public function getPathElements()
     {
         return $this->get("path");
     }
 
+
+    
     public function getPathTo($n)
     {
         $path = $this->get("parseurl.path");
@@ -100,10 +116,14 @@ class Url extends Settable
         return substr($path, 0, $n);
     }        
 
+
+    
     public function getParams()
     {
         return $this->get("params");
     }
+
+
 
     public function hasParam($p)
     {
@@ -113,6 +133,8 @@ class Url extends Settable
             return false;
         }
     }
+
+
 
     public function getParam($p)
     {

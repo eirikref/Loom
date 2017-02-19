@@ -65,4 +65,10 @@ class Template
         print $html;
     }
 
+
+    public function addPath($path)
+    {
+        $this->loader->addPath($path);
+    }
+
 }

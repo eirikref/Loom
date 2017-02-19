@@ -325,6 +325,8 @@ class Settable
         return $isValid;
     }
 
+
+    
     public function setData(array $data)
     {
         foreach ($data as $key => $val) {
@@ -332,6 +334,9 @@ class Settable
         }
     }
 
+
+
+    // FIXME: Does not support multi-level checks
     public function has($key)
     {
         if (is_string($key) || is_int($key)) {
