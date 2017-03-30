@@ -50,6 +50,7 @@ class Response
         $this->httpStatus = $code;
     }
 
+    
 
     public function getHttpStatus()
     {
@@ -136,7 +137,7 @@ class Response
         }
 
         $ret["debug"] = $this->debug->get();
-
+                    
         return $ret;
     }
 

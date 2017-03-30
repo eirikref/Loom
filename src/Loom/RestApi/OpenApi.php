@@ -17,10 +17,13 @@ namespace Loom\RestApi;
  */
 class OpenApi implements \Loom\RestApi\Model
 {
+
     private $spec;
     private $lookup = array();
     private $resources = array();
 
+
+    
     /**
      * Constructor
      *
@@ -43,6 +46,7 @@ class OpenApi implements \Loom\RestApi\Model
         // echo json_last_error();
     }
 
+    
 
     private function readSpec($specPath)
     {
@@ -63,21 +67,7 @@ class OpenApi implements \Loom\RestApi\Model
         unset($arrSpec["paths"]);
 
         $this->spec->setData($arrSpec);
-
-        foreach ($paths as $path => $methods) {
-            $path = $this->getBasePath() . $path;
-
-            foreach ($methods as $m => $data) {
-                $r = new \Loom\RestApi\Resource();
-                $r->setData($data);
-                $r->set("path", $path);
-                $r->set("method", $m);
-                // $key = "$path.$m";
-                $this->resources[$path][$m] = $r;
-                // print_pre_r($m);
-                //print_pre_r($data);
-            }
-        }
+        $this->addPaths($paths);
         // print_pre_r($this->resources);
     }
 
@@ -105,5 +95,34 @@ class OpenApi implements \Loom\RestApi\Model
         return $this->resources;
     }
 
+
+    
+    public function addPaths(array $paths)
+    {
+        foreach ($paths as $path => $methods) {
+            $path = $this->getBasePath() . $path;
+
+            foreach ($methods as $m => $data) {
+                $r = new \Loom\RestApi\Resource();
+                $r->setData($data);
+                $r->set("path", $path);
+                $r->set("method", $m);
+                // $key = "$path.$m";
+                $this->resources[$path][$m] = $r;
+                // print_pre_r($m);
+                //print_pre_r($data);
+            }
+        }
+    }
+
+
+
+    public function addDefinitions(array $defs)
+    {
+        foreach ($defs as $key => $val) {
+            $this->spec->set("definitions.$key", $val);
+        }
+    }
+    
 
 }

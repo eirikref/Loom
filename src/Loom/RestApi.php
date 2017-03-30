@@ -129,6 +129,7 @@ class RestApi
 
     public function &getResponse()
     {
+        // print_pre_r($this->response);
         return $this->response;
     }
 
@@ -160,11 +161,14 @@ class RestApi
     }
 
 
+    
     public function getResources()
     {
         return $this->model->getResources();
     }
 
+
+    
     public function hasRequiredParams()
     {
         $required = $this->resource->getRequiredParams();
@@ -181,4 +185,18 @@ class RestApi
         return true;
     }
 
+
+
+    public function addPaths(array $paths)
+    {
+        $this->model->addPaths($paths);
+    }
+
+
+
+    public function addDefinitions(array $defs)
+    {
+        $this->model->addDefinitions($defs);
+    }
+    
 }

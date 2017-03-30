@@ -90,6 +90,13 @@ class Url extends Settable
     
 
 
+    public function getFirstElement()
+    {
+        return $this->getPathElement(0);
+    }
+    
+
+
     public function getPathElements()
     {
         return $this->get("path");

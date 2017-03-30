@@ -42,6 +42,8 @@ class Model extends \Loom\Settable
         }
     }
 
+
+    
     private function prepare($data)
     {
         $def = $this->definition->get();
@@ -83,6 +85,7 @@ class Model extends \Loom\Settable
     }
 
 
+    
     // 1. csv keys
     // 2. csv ?
     // 3. values
@@ -152,15 +155,7 @@ class Model extends \Loom\Settable
     // }
 
 
-    
 
-
-
-
-
-
-
-    
     public function initFields($context)
     {
         $state  = \Loom\System\State::getInstance();
@@ -208,10 +203,13 @@ class Model extends \Loom\Settable
         $this->fields = $ret;
     }
 
+
+    
     public function getFields()
     {
         return $this->fields;
     }
+
 
     
     public function setFieldValues($field, array $values)
@@ -242,16 +240,22 @@ class Model extends \Loom\Settable
         }
     }
 
+
+    
     public function getDefaultFieldWrapper()
     {
         return $this->get("defaultFieldWrapper");
     }
 
+
+    
     public function getFieldLabel($field, $key)
     {
         return $this->definition->getFieldLabel($field, $key);
     }
 
+
+    
     public function isSelected($field, $key)
     {
         $tmp = $this->get($field);
@@ -263,6 +267,8 @@ class Model extends \Loom\Settable
         }
     }
 
+
+    
     public function getFieldValue($field)
     {
         return $this->get($field);

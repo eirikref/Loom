@@ -55,13 +55,21 @@ class Template
 
 
     
-    public function render($tpl, array $args = null)
+    public function fetch($tpl, array $args = null)
     {
         $state = \Loom\System\State::getInstance();
         $args["state"] = $state;
         $args["user"]  = $state->getUser();
 
         $html = $this->twig->render($tpl, $args);
+        return $html;
+    }
+
+
+
+    public function render($tpl, array $args = null)
+    {
+        $html = $this->fetch($tpl, $args);
         print $html;
     }
 

@@ -15,7 +15,7 @@ class QueryGroup
     }
 
 
-    protected function query($query, $args)
+    protected function query($query, array $args = null)
     {
         // print_pre_r($this->parent);
         return $this->parent->queryBackend($query, $args);

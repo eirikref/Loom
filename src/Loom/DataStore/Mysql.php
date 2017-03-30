@@ -128,7 +128,7 @@ class Mysql implements \Loom\DataStore\StorageEngineInterface
             return false;
         }
 
-        $sth = $this->dbh->prepare($query,array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
+        $sth = $this->dbh->prepare($query, array(\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY));
 
         if (true === $sth->execute($args)) {
             return $sth->fetchAll(\PDO::FETCH_ASSOC);

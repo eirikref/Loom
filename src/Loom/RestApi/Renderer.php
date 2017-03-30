@@ -25,10 +25,15 @@ class Renderer
         http_response_code($resp->getHttpStatus());
         header("Content-Type: application/vnd.api+json");
         
-        // print_pre_r($resp);
+        // print_pre_r($resp->get());
         
         $json = json_encode($resp->get());
+        // print_pre_r($json);
         print $json;
+    }
+
+    protected function transform(array $input)
+    {
     }
 
 }
