@@ -47,7 +47,7 @@ class GetReadableFileTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @dataProvider getInvalidValues
-     * @covers       \Loom\Config::getReadableFile
+     * @covers       \Loom\System\Config::getReadableFile
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2014-07-02
      * @access       public
@@ -90,7 +90,7 @@ class GetReadableFileTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @dataProvider getValidButNonExistentPaths
-     * @covers       \Loom\Config::getReadableFile
+     * @covers       \Loom\System\Config::getReadableFile
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2014-07-02
      * @access       public
@@ -130,7 +130,7 @@ class GetReadableFileTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @dataProvider getValidPaths
-     * @covers       \Loom\Config::getReadableFile
+     * @covers       \Loom\System\Config::getReadableFile
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2014-07-02
      * @access       public
@@ -153,7 +153,7 @@ class GetReadableFileTest extends \PHPUnit_Framework_TestCase
      *
      * @test
      * @dataProvider getValidPaths
-     * @covers       \Loom\Config::getReadableFile
+     * @covers       \Loom\System\Config::getReadableFile
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2014-07-02
      * @access       public
@@ -176,7 +176,7 @@ class GetReadableFileTest extends \PHPUnit_Framework_TestCase
      * Test fromIni() using valid path, but file with invalid content
      *
      * @test
-     * @covers \Loom\Config::fromIni
+     * @covers \Loom\System\Config::fromIni
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-07-02
      * @access public
