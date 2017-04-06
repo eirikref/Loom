@@ -28,7 +28,7 @@ class ConstructTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructorWithoutArguments()
     {
-        $config = new \Loom\Config();
+        $config = new \Loom\System\Config();
         $this->assertEquals(0, count($config->get()));
     }
 
@@ -46,7 +46,7 @@ class ConstructTest extends \PHPUnit_Framework_TestCase
     public function testConstructorWithEmptyArray()
     {
         $arg    = array();
-        $config = new \Loom\Config($arg);
+        $config = new \Loom\System\Config($arg);
         $this->assertEquals(0, count($config->get()));
     }
 
@@ -67,7 +67,7 @@ class ConstructTest extends \PHPUnit_Framework_TestCase
                         "b"     => "some other value",
                         "b.c.d" => "yet another value");
 
-        $config = new \Loom\Config($arg);
+        $config = new \Loom\System\Config($arg);
         $this->assertEquals(3, count($config->get()));
     }
 }

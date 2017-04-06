@@ -1,8 +1,0 @@
-article:
-  _get: getArticles
-
-  _string:
-    _get: getArticle
-    _post: updateArticle
-    _put: addArticle
-    _delete: deleteArticle

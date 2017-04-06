@@ -7,14 +7,14 @@
 namespace Loom\Tests\Unit\Config;
 
 /**
- * Loom: Unit tests for Config::fromYaml()
+ * Loom: Unit tests for Config::fromIni()
  *
  * @package    Loom
  * @subpackage Tests
- * @version    2014-07-01
+ * @version    2014-07-02
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class FromYamlTest extends \PHPUnit_Framework_TestCase
+class FromIniTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -43,11 +43,11 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test fromYaml() using invalid path value
+     * Test fromIni() using invalid path value
      *
      * @test
      * @dataProvider getInvalidPaths
-     * @covers       \Loom\Config::fromYaml
+     * @covers       \Loom\Config::fromIni
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2014-07-01
      * @access       public
@@ -55,7 +55,7 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithInvalidPaths($path)
     {
-        $this->assertNull(\Loom\Config::fromYaml($path));
+        $this->assertNull(\Loom\System\Config::fromIni($path));
     }
 
 
@@ -81,11 +81,11 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test fromYaml() using valid, but non-existent, paths
+     * Test fromIni() using valid, but non-existent, paths
      *
      * @test
      * @dataProvider getValidButNonExistentPaths
-     * @covers       \Loom\Config::fromYaml
+     * @covers       \Loom\Config::fromIni
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2014-07-01
      * @access       public
@@ -93,7 +93,7 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithValidButNonExistentPaths($path)
     {
-        $this->assertNull(\Loom\Config::fromYaml($path));
+        $this->assertNull(\Loom\System\Config::fromIni($path));
     }
 
 
@@ -109,18 +109,18 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
     public function getValidPaths()
     {
         return array(
-            array("tests/unit/Config/data/simple.yaml"),
+            array("tests/unit/System/Config/data/simple.ini"),
         );
     }
 
 
 
     /**
-     * Test fromYaml() using valid paths
+     * Test fromIni() using valid paths
      *
      * @test
      * @dataProvider getValidPaths
-     * @covers       \Loom\Config::fromYaml
+     * @covers       \Loom\Config::fromIni
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2014-07-01
      * @access       public
@@ -128,22 +128,18 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithValidPaths($path)
     {
-        if (!extension_loaded("yaml")) {
-            return;
-        }
-
-        $res = \Loom\Config::fromYaml($path);
-        $this->assertTrue($res instanceof \Loom\Config);
+        $res = \Loom\System\Config::fromIni($path);
+        $this->assertTrue($res instanceof \Loom\System\Config);
     }
 
 
 
     /**
-     * Test fromYaml() using valid paths as File objects
+     * Test fromIni() using valid paths as File objects
      *
      * @test
      * @dataProvider getValidPaths
-     * @covers       \Loom\Config::fromYaml
+     * @covers       \Loom\Config::fromIni
      * @author       Eirik Refsdal <eirikref@gmail.com>
      * @since        2014-07-01
      * @access       public
@@ -151,22 +147,18 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithValidPathsAsFileObjects($path)
     {
-        if (!extension_loaded("yaml")) {
-            return;
-        }
-
         $file = \Loom\File::fromPath($path);
-        $res  = \Loom\Config::fromYaml($file);
-        $this->assertTrue($res instanceof \Loom\Config);
+        $res  = \Loom\System\Config::fromIni($file);
+        $this->assertTrue($res instanceof \Loom\System\Config);
     }
 
 
 
     /**
-     * Test fromYaml() using valid path, but file with invalid content
+     * Test fromIni() using valid path, but file with invalid content
      *
      * @test
-     * @covers \Loom\Config::fromYaml
+     * @covers \Loom\Config::fromIni
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-07-02
      * @access public
@@ -174,7 +166,7 @@ class FromYamlTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidContent()
     {
-        $path = "tests/unit/Config/data/invalid.yaml";
-        \Loom\Config::fromYaml($path);
+        $path = "tests/unit/System/Config/data/invalid.ini";
+        \Loom\System\Config::fromIni($path);
     }
 }

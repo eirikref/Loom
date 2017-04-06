@@ -101,7 +101,7 @@ class Config extends \Loom\Settable
             $arr = @parse_ini_file($file->getPath());
 
             if (is_array($arr)) {
-                return new \Loom\Config($arr);
+                return new \Loom\System\Config($arr);
             }
         }
         

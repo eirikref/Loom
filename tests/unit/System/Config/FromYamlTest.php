@@ -7,25 +7,25 @@
 namespace Loom\Tests\Unit\Config;
 
 /**
- * Loom: Unit tests for Config::getReadableFile()
+ * Loom: Unit tests for Config::fromYaml()
  *
  * @package    Loom
  * @subpackage Tests
- * @version    2014-07-02
+ * @version    2014-07-01
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class GetReadableFileTest extends \PHPUnit_Framework_TestCase
+class FromYamlTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Data provider with all kinds of invalid values
+     * Data provider with all kinds of invalid paths
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-07-02
+     * @since  2014-07-01
      * @access public
      * @return array
      */
-    public function getInvalidValues()
+    public function getInvalidPaths()
     {
         return array(
             array(11),
@@ -43,24 +43,19 @@ class GetReadableFileTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test getReadableFile() using invalid input values
+     * Test fromYaml() using invalid path value
      *
      * @test
-     * @dataProvider getInvalidValues
-     * @covers       \Loom\Config::getReadableFile
+     * @dataProvider getInvalidPaths
+     * @covers       \Loom\Config::fromYaml
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-07-02
+     * @since        2014-07-01
      * @access       public
      * @return       void
      */
-    public function testWithInvalidValues($input)
+    public function testWithInvalidPaths($path)
     {
-        $class  = $this->getMock("\Loom\Config");
-        $method = new \ReflectionMethod($class, "getReadableFile");
-        $method->setAccessible(true);
-
-        $result = $method->invoke($class, $input);
-        $this->assertNull($result);
+        $this->assertNull(\Loom\System\Config::fromYaml($path));
     }
 
 
@@ -86,24 +81,19 @@ class GetReadableFileTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test getReadableFile() using valid but non-existent path values
+     * Test fromYaml() using valid, but non-existent, paths
      *
      * @test
      * @dataProvider getValidButNonExistentPaths
-     * @covers       \Loom\Config::getReadableFile
+     * @covers       \Loom\Config::fromYaml
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-07-02
+     * @since        2014-07-01
      * @access       public
      * @return       void
      */
-    public function testWithValidButNonExistentValues($input)
+    public function testWithValidButNonExistentPaths($path)
     {
-        $class  = $this->getMock("\Loom\Config");
-        $method = new \ReflectionMethod($class, "getReadableFile");
-        $method->setAccessible(true);
-
-        $result = $method->invoke($class, $input);
-        $this->assertNull($result);
+        $this->assertNull(\Loom\System\Config::fromYaml($path));
     }
 
 
@@ -112,71 +102,71 @@ class GetReadableFileTest extends \PHPUnit_Framework_TestCase
      * Data provider with valid paths that do exist
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-07-02
+     * @since  2014-07-01
      * @access public
      * @return array
      */
     public function getValidPaths()
     {
         return array(
-            array("tests/unit/Config/data/simple.ini"),
+            array("tests/unit/Config/data/simple.yaml"),
         );
     }
 
 
 
     /**
-     * Test getReadableFile() using valid paths
+     * Test fromYaml() using valid paths
      *
      * @test
      * @dataProvider getValidPaths
-     * @covers       \Loom\Config::getReadableFile
+     * @covers       \Loom\Config::fromYaml
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-07-02
+     * @since        2014-07-01
      * @access       public
      * @return       void
      */
     public function testWithValidPaths($path)
     {
-        $class  = $this->getMock("\Loom\Config");
-        $method = new \ReflectionMethod($class, "getReadableFile");
-        $method->setAccessible(true);
+        if (!extension_loaded("yaml")) {
+            return;
+        }
 
-        $result = $method->invoke($class, $path);
-        $this->assertTrue($result instanceof \Loom\File);
+        $res = \Loom\System\Config::fromYaml($path);
+        $this->assertTrue($res instanceof \Loom\System\Config);
     }
 
 
 
     /**
-     * Test getReadableFile() using valid paths as File objects
+     * Test fromYaml() using valid paths as File objects
      *
      * @test
      * @dataProvider getValidPaths
-     * @covers       \Loom\Config::getReadableFile
+     * @covers       \Loom\Config::fromYaml
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-07-02
+     * @since        2014-07-01
      * @access       public
      * @return       void
      */
     public function testWithValidPathsAsFileObjects($path)
     {
-        $file   = \Loom\File::fromPath($path);
-        $class  = $this->getMock("\Loom\Config");
-        $method = new \ReflectionMethod($class, "getReadableFile");
-        $method->setAccessible(true);
+        if (!extension_loaded("yaml")) {
+            return;
+        }
 
-        $result = $method->invoke($class, $file);
-        $this->assertTrue($result instanceof \Loom\File);
+        $file = \Loom\File::fromPath($path);
+        $res  = \Loom\System\Config::fromYaml($file);
+        $this->assertTrue($res instanceof \Loom\System\Config);
     }
 
 
 
     /**
-     * Test fromIni() using valid path, but file with invalid content
+     * Test fromYaml() using valid path, but file with invalid content
      *
      * @test
-     * @covers \Loom\Config::fromIni
+     * @covers \Loom\Config::fromYaml
      * @author Eirik Refsdal <eirikref@gmail.com>
      * @since  2014-07-02
      * @access public
@@ -184,7 +174,7 @@ class GetReadableFileTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidContent()
     {
-        $path = "tests/unit/Config/data/invalid.ini";
-        \Loom\Config::fromIni($path);
+        $path = "tests/unit/Config/data/invalid.yaml";
+        \Loom\System\Config::fromYaml($path);
     }
 }

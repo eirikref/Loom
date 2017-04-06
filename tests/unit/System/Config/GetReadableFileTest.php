@@ -7,25 +7,25 @@
 namespace Loom\Tests\Unit\Config;
 
 /**
- * Loom: Unit tests for Config::fromIni()
+ * Loom: Unit tests for Config::getReadableFile()
  *
  * @package    Loom
  * @subpackage Tests
  * @version    2014-07-02
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class FromIniTest extends \PHPUnit_Framework_TestCase
+class GetReadableFileTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * Data provider with all kinds of invalid paths
+     * Data provider with all kinds of invalid values
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-07-01
+     * @since  2014-07-02
      * @access public
      * @return array
      */
-    public function getInvalidPaths()
+    public function getInvalidValues()
     {
         return array(
             array(11),
@@ -43,19 +43,24 @@ class FromIniTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test fromIni() using invalid path value
+     * Test getReadableFile() using invalid input values
      *
      * @test
-     * @dataProvider getInvalidPaths
-     * @covers       \Loom\Config::fromIni
+     * @dataProvider getInvalidValues
+     * @covers       \Loom\Config::getReadableFile
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-07-01
+     * @since        2014-07-02
      * @access       public
      * @return       void
      */
-    public function testWithInvalidPaths($path)
+    public function testWithInvalidValues($input)
     {
-        $this->assertNull(\Loom\Config::fromIni($path));
+        $class  = $this->getMock("\Loom\System\Config");
+        $method = new \ReflectionMethod($class, "getReadableFile");
+        $method->setAccessible(true);
+
+        $result = $method->invoke($class, $input);
+        $this->assertNull($result);
     }
 
 
@@ -81,19 +86,24 @@ class FromIniTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * Test fromIni() using valid, but non-existent, paths
+     * Test getReadableFile() using valid but non-existent path values
      *
      * @test
      * @dataProvider getValidButNonExistentPaths
-     * @covers       \Loom\Config::fromIni
+     * @covers       \Loom\Config::getReadableFile
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-07-01
+     * @since        2014-07-02
      * @access       public
      * @return       void
      */
-    public function testWithValidButNonExistentPaths($path)
+    public function testWithValidButNonExistentValues($input)
     {
-        $this->assertNull(\Loom\Config::fromIni($path));
+        $class  = $this->getMock("\Loom\System\Config");
+        $method = new \ReflectionMethod($class, "getReadableFile");
+        $method->setAccessible(true);
+
+        $result = $method->invoke($class, $input);
+        $this->assertNull($result);
     }
 
 
@@ -102,54 +112,62 @@ class FromIniTest extends \PHPUnit_Framework_TestCase
      * Data provider with valid paths that do exist
      *
      * @author Eirik Refsdal <eirikref@gmail.com>
-     * @since  2014-07-01
+     * @since  2014-07-02
      * @access public
      * @return array
      */
     public function getValidPaths()
     {
         return array(
-            array("tests/unit/Config/data/simple.ini"),
+            array("tests/unit/System/Config/data/simple.ini"),
         );
     }
 
 
 
     /**
-     * Test fromIni() using valid paths
+     * Test getReadableFile() using valid paths
      *
      * @test
      * @dataProvider getValidPaths
-     * @covers       \Loom\Config::fromIni
+     * @covers       \Loom\Config::getReadableFile
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-07-01
+     * @since        2014-07-02
      * @access       public
      * @return       void
      */
     public function testWithValidPaths($path)
     {
-        $res = \Loom\Config::fromIni($path);
-        $this->assertTrue($res instanceof \Loom\Config);
+        $class  = $this->getMock("\Loom\System\Config");
+        $method = new \ReflectionMethod($class, "getReadableFile");
+        $method->setAccessible(true);
+
+        $result = $method->invoke($class, $path);
+        $this->assertTrue($result instanceof \Loom\File);
     }
 
 
 
     /**
-     * Test fromIni() using valid paths as File objects
+     * Test getReadableFile() using valid paths as File objects
      *
      * @test
      * @dataProvider getValidPaths
-     * @covers       \Loom\Config::fromIni
+     * @covers       \Loom\Config::getReadableFile
      * @author       Eirik Refsdal <eirikref@gmail.com>
-     * @since        2014-07-01
+     * @since        2014-07-02
      * @access       public
      * @return       void
      */
     public function testWithValidPathsAsFileObjects($path)
     {
-        $file = \Loom\File::fromPath($path);
-        $res  = \Loom\Config::fromIni($file);
-        $this->assertTrue($res instanceof \Loom\Config);
+        $file   = \Loom\File::fromPath($path);
+        $class  = $this->getMock("\Loom\System\Config");
+        $method = new \ReflectionMethod($class, "getReadableFile");
+        $method->setAccessible(true);
+
+        $result = $method->invoke($class, $file);
+        $this->assertTrue($result instanceof \Loom\File);
     }
 
 
@@ -166,7 +184,7 @@ class FromIniTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidContent()
     {
-        $path = "tests/unit/Config/data/invalid.ini";
-        \Loom\Config::fromIni($path);
+        $path = "tests/unit/System/Config/data/invalid.ini";
+        \Loom\System\Config::fromIni($path);
     }
 }
