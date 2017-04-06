@@ -35,5 +35,4 @@ class Renderer
     protected function transform(array $input)
     {
     }
-
 }

@@ -19,5 +19,4 @@ class Field extends \Loom\Settable
     {
         $this->set("selected", $in);
     }
-    
 }

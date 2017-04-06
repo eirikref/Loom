@@ -152,6 +152,11 @@ class File
             return false;
         }
 
+        if (!isset($_SERVER["PWD"])) {
+            // error_log("error error");
+            return false;
+        }
+
         $base   = explode("/", $_SERVER["PWD"]);
         $remove = 0;
         $add    = array();

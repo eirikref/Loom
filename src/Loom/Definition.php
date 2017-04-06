@@ -41,7 +41,6 @@ class Definition
         $ret    = array();
         
         foreach ($this->fields as $key => $val) {
-
             if (isset($val["hidden"])) {
                 continue;
             }
@@ -134,5 +133,4 @@ class Definition
             return $key;
         }
     }
-    
 }

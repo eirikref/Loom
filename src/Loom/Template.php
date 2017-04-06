@@ -78,5 +78,4 @@ class Template
     {
         $this->loader->addPath($path);
     }
-
 }

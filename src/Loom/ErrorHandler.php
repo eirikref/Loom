@@ -6,5 +6,4 @@ interface ErrorHandler
 {
 
     public function run();
-
 }

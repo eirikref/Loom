@@ -123,6 +123,4 @@ class OpenApi implements \Loom\RestApi\Model
             $this->spec->set("definitions.$key", $val);
         }
     }
-    
-
 }

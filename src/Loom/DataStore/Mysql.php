@@ -89,8 +89,11 @@ class Mysql implements \Loom\DataStore\StorageEngineInterface
     public function connect()
     {
         $this->resetError();
-        $dsn = sprintf("mysql:host=%s;dbname=%s",
-                       $this->config["host"], $this->config["db"]);
+        $dsn = sprintf(
+            "mysql:host=%s;dbname=%s",
+            $this->config["host"],
+            $this->config["db"]
+        );
 
         try {
             $this->dbh = new \PDO($dsn, $this->config["user"], $this->config["pass"]);

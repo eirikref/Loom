@@ -210,5 +210,4 @@ class State
             die("Critical error and system error handler is not configured");
         }
     }
-
 }

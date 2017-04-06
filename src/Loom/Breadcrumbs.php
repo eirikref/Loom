@@ -35,5 +35,4 @@ class Breadcrumbs
     {
         $this->data = [];
     }
-
 }

@@ -319,7 +319,6 @@ class Settable
                     $isValid = true;
                 }
                 break;
-
         }
 
         return $isValid;

@@ -35,5 +35,4 @@ class Resource extends \Loom\Settable
 
         return $ret;
     }
-    
 }

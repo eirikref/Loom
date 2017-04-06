@@ -75,5 +75,4 @@ class DataStore
         return $this->backend->query($query, $args);
         // print_pre_r($tmp);
     }
-    
 }

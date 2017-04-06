@@ -101,5 +101,4 @@ class User extends Settable
     {
         return $this->get("email");
     }
-
 }

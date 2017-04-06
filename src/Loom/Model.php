@@ -12,7 +12,6 @@ class Model extends \Loom\Settable
     
     public function __construct()
     {
-        
     }
 
 
@@ -35,8 +34,6 @@ class Model extends \Loom\Settable
             if (false === $validate || (true === $validate &&
                                         isset($this->definition) &&
                                         $this->definition->validate($key, $val))) {
-
-
                 $this->set($key, $val);
             }
         }
@@ -109,7 +106,6 @@ class Model extends \Loom\Settable
                     }
                 }
             }
-            
         }
         
         $ret["fields"]       = sprintf("(%s)", implode(", ", $fields));
@@ -163,7 +159,6 @@ class Model extends \Loom\Settable
         $ret    = array();
         
         foreach ($this->definition->getFields() as $key => $val) {
-
             if (isset($val["opts"]["no" . $context])) {
                 continue;
             }
@@ -172,17 +167,21 @@ class Model extends \Loom\Settable
             $ret[$key]["id"]       = $key;
             $ret[$key]["viewBase"] = $this->get("viewBaseDir") . $context . "/";
             $ret[$key]["viewExt"]  = $this->get("viewExtension");
-            $ret[$key]["tpl"]      = sprintf("%s%s%s%s",
-                                             $this->get("viewBaseDir"),
-                                             $context . "/",
-                                             $val["type"],
-                                             $this->get("viewExtension"));
+            $ret[$key]["tpl"]      = sprintf(
+                "%s%s%s%s",
+                $this->get("viewBaseDir"),
+                $context . "/",
+                $val["type"],
+                $this->get("viewExtension")
+            );
 
             if (isset($val["wrapper"])) {
-                $ret[$key]["wrapper"] = sprintf("%s/%s%s",
-                                                $config->get("templates.wrapperDir"),
-                                                $val["wrapper"],
-                                                $config->get("templates.ext"));
+                $ret[$key]["wrapper"] = sprintf(
+                    "%s/%s%s",
+                    $config->get("templates.wrapperDir"),
+                    $val["wrapper"],
+                    $config->get("templates.ext")
+                );
             } else {
                 $ret[$key]["wrapper"] = $this->getDefaultFieldWrapper();
             }
@@ -194,7 +193,6 @@ class Model extends \Loom\Settable
             } elseif ("datepicker" == $val["type"]) {
                 $ret[$key]["value"] = date("Y-m-d");
             }
-                
         }
 
         // print_pre_r($ret);
@@ -273,5 +271,4 @@ class Model extends \Loom\Settable
     {
         return $this->get($field);
     }
-    
 }

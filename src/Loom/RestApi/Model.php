@@ -23,5 +23,4 @@ interface Model
     public function getResources();
     public function addPaths(array $paths);
     public function addDefinitions(array $defs);
-
 }

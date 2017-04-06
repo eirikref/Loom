@@ -121,7 +121,7 @@ class Url extends Settable
         }
 
         return substr($path, 0, $n);
-    }        
+    }
 
 
     
@@ -147,5 +147,4 @@ class Url extends Settable
     {
         return $this->get("params.$p");
     }
-
 }

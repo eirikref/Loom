@@ -122,7 +122,6 @@ class RestApi
 
             return;
         }
-        
     }
 
 
@@ -198,5 +197,4 @@ class RestApi
     {
         $this->model->addDefinitions($defs);
     }
-    
 }

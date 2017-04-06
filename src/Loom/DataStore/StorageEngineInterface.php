@@ -9,5 +9,4 @@ interface StorageEngineInterface
     public function disconnect();
     public function isReady();
     public function query($query, array $args = null);
-
 }

@@ -20,7 +20,5 @@ class Error
 
     public function __construct($code, $msg)
     {
-        
     }
-
 }

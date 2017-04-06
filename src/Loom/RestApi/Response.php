@@ -124,21 +124,19 @@ class Response
         $ret = array();
 
         switch ($this->state) {
+            case $this::OK:
+                $ret["data"] = $this->data->get();
+                break;
 
-        case $this::OK:
-            $ret["data"] = $this->data->get();
-            break;
+            case $this::ERROR:
+                $ret["errors"] = $this->populateErrors();
+                break;
 
-        case $this::ERROR:
-            $ret["errors"] = $this->populateErrors();
-            break;
-
-        default:
+            default:
         }
 
         $ret["debug"] = $this->debug->get();
                     
         return $ret;
     }
-
 }
