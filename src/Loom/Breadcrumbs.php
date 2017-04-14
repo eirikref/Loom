@@ -105,7 +105,7 @@ class Breadcrumbs
      */
     public function reset()
     {
-        empty($this->data);
+        $this->data = array();
     }
 
 }
