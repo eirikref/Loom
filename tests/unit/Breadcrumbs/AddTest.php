@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\Breadcrumbs;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for Breadcrumbs::add()
@@ -14,7 +15,7 @@ namespace Loom\Tests\Unit\Breadcrumbs;
  * @version    2017-04-09
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class SetSingleTest extends \PHPUnit_Framework_TestCase
+class SetSingleTest extends TestCase
 {
 
 

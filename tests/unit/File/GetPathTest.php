@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\File;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for File::getPath()
@@ -14,7 +15,7 @@ namespace Loom\Tests\Unit\File;
  * @version    2014-05-26
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class GetPathTest extends \PHPUnit_Framework_TestCase
+class GetPathTest extends TestCase
 {
 
     /**

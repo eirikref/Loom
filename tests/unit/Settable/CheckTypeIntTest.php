@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\Settable;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for making sure Settable::checkType() handle
@@ -15,7 +16,7 @@ namespace Loom\Tests\Unit\Settable;
  * @version    2014-05-11
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class CheckTypeIntTest extends \PHPUnit_Framework_TestCase
+class CheckTypeIntTest extends TestCase
 {
 
     /**
@@ -57,7 +58,7 @@ class CheckTypeIntTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonInts($value)
     {
-        $reflection = $this->getMock("\Loom\Settable");
+        $reflection = $this->createMock("\Loom\Settable");
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         
@@ -100,7 +101,7 @@ class CheckTypeIntTest extends \PHPUnit_Framework_TestCase
      */
     public function testStrings($value)
     {
-        $reflection = $this->getMock("\Loom\Settable");
+        $reflection = $this->createMock("\Loom\Settable");
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         

@@ -36,9 +36,14 @@ class OpenApi implements \Loom\RestApi\Model
     {
         $this->spec = new \Loom\Settable();
 
+        // if (is_string($spec)) {
         $json = $this->readSpec($specPath);
-        $this->parseJson($json);
-
+        if (isset($json)) {
+            $this->parseJson($json);
+        }
+        // } elseif (is_array($spec)) {
+        //     echo "hei";
+        // }
         // $json = file_get_contents($def);
         // $this->spec->setData(json_decode($json, true));
         // $this->createLookupTable();
@@ -50,7 +55,8 @@ class OpenApi implements \Loom\RestApi\Model
 
     private function readSpec($specPath)
     {
-        if (!(file_exists($specPath) && is_readable($specPath))) {
+        if (!is_string($specPath) || !(file_exists($specPath) && is_readable($specPath))) {
+            error_log("OpenApi: Spec $specPath does not exist");
             // FIXME: Error handling here
             return;
         }

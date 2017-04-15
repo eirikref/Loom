@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\Settable;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for making sure Settable::get() behaves correctly
@@ -15,7 +16,7 @@ namespace Loom\Tests\Unit\Settable;
  * @version    2014-05-09
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class GetInvalidTypeTest extends \PHPUnit_Framework_TestCase
+class GetInvalidTypeTest extends TestCase
 {
 
     /**

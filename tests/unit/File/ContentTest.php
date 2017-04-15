@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\File;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for File::setContent() and File::getContent()
@@ -14,7 +15,7 @@ namespace Loom\Tests\Unit\File;
  * @version    2014-05-29
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class ContentTest extends \PHPUnit_Framework_TestCase
+class ContentTest extends TestCase
 {
 
     /**

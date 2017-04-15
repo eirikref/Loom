@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\Settable;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for making sure Settable::setDelimiter() behaves
@@ -15,7 +16,7 @@ namespace Loom\Tests\Unit\Settable;
  * @version    2014-05-10
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class SetDelimiterTest extends \PHPUnit_Framework_TestCase
+class SetDelimiterTest extends TestCase
 {
 
     /**

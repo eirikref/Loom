@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\Breadcrumbs;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for Breadcrumbs::set() and get()
@@ -14,7 +15,7 @@ namespace Loom\Tests\Unit\Breadcrumbs;
  * @version    2017-04-13
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class SetAndGetTest extends \PHPUnit_Framework_TestCase
+class SetAndGetTest extends TestCase
 {
 
 

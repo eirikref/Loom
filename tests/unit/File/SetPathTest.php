@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\File;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for File::setPath()
@@ -14,7 +15,7 @@ namespace Loom\Tests\Unit\File;
  * @version    2014-05-26
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class SetPathTest extends \PHPUnit_Framework_TestCase
+class SetPathTest extends TestCase
 {
 
     /**
@@ -54,7 +55,7 @@ class SetPathTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithInvalidPaths($path)
     {
-        $reflection = $this->getMock("\Loom\File");
+        $reflection = $this->createMock("\Loom\File");
         $method = new \ReflectionMethod($reflection, "setPath");
         $method->setAccessible(true);
 
@@ -96,7 +97,7 @@ class SetPathTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithValidPaths($path)
     {
-        $reflection = $this->getMock("\Loom\File");
+        $reflection = $this->createMock("\Loom\File");
         $method = new \ReflectionMethod($reflection, "setPath");
         $method->setAccessible(true);
 
@@ -140,7 +141,7 @@ class SetPathTest extends \PHPUnit_Framework_TestCase
     public function testWithIncompletePaths($input, $append)
     {
         $exp        = $_SERVER['PWD'] . $append;
-        $reflection = $this->getMock("\Loom\File");
+        $reflection = $this->createMock("\Loom\File");
         $method = new \ReflectionMethod($reflection, "setPath");
         $method->setAccessible(true);
         
@@ -182,7 +183,7 @@ class SetPathTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithDoubleDotPaths($input, $numRemove, $append)
     {
-        $reflection = $this->getMock("\Loom\File");
+        $reflection = $this->createMock("\Loom\File");
         $method = new \ReflectionMethod($reflection, "setPath");
         $method->setAccessible(true);
 

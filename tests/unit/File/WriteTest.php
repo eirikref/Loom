@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\File;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for File::write()
@@ -18,7 +19,7 @@ namespace Loom\Tests\Unit\File;
  * @version    2014-06-27
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class WriteTest extends \PHPUnit_Framework_TestCase
+class WriteTest extends TestCase
 {
 
     /**

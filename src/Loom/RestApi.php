@@ -34,12 +34,15 @@ class RestApi
      * @access public
      * @return void
      */
-    public function __construct($spec, $request)
+    public function __construct($spec, \Loom\Request $request = null)
     {
         $this->model    = new \Loom\RestApi\OpenApi($spec);
-        $this->request  = $request;
         $this->response = new \Loom\RestApi\Response();
         $this->renderer = new \Loom\RestApi\Renderer();
+
+        if ($request) {
+            $this->request  = $request;
+        }
     }
 
 
@@ -65,6 +68,10 @@ class RestApi
     
     private function match()
     {
+        if (!$this->request || !$this->request instanceof \Loom\Request) {
+            return false;
+        }
+        
         $path   = $this->request->getPath();
         $list   = $this->model->getResources();
         $method = $this->request->getMethod();

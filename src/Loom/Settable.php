@@ -60,6 +60,16 @@ class Settable
     protected $valid = array();
 
 
+
+    protected function validateKey($key)
+    {
+        if (!is_string($key) || strlen($key) < 1 || strlen($key) > $this->maxKeyLength) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     /**
      * Set a value
      *
@@ -338,10 +348,27 @@ class Settable
     // FIXME: Does not support multi-level checks
     public function has($key)
     {
-        if (is_string($key) || is_int($key)) {
-            return isset($this->data[$key]);
+        if (false === $this->validateKey($key)) {
+            return false;
         }
 
+        $subkeys = explode($this->delimiter, $key);
+        $last    = end($subkeys);
+        $tmp     = $this->data;
+
+        foreach ($subkeys as $s) {
+            if (is_array($tmp) && isset($tmp[$s])) {
+
+                if ($s == $last) {
+                    return true;
+                } else {
+                    $tmp = $tmp[$s];
+                }
+            } elseif (is_string($tmp) && $s == $tmp) {
+                return true;
+            }
+        }
+        
         return false;
     }
 }

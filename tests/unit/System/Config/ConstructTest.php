@@ -4,7 +4,8 @@
  * Copyright (c) 2014 Eirik Refsdal <eirikref@gmail.com>
  */
 
-namespace Loom\Tests\Unit\Settable;
+namespace Loom\Tests\Unit\System\Config;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for the Config constructor
@@ -14,7 +15,7 @@ namespace Loom\Tests\Unit\Settable;
  * @version    2014-07-01
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class ConstructTest extends \PHPUnit_Framework_TestCase
+class ConstructTest extends TestCase
 {
 
     /**

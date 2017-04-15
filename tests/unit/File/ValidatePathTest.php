@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\File;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for File::validatePath()
@@ -14,7 +15,7 @@ namespace Loom\Tests\Unit\File;
  * @version    2014-06-30
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class ValidatePathTest extends \PHPUnit_Framework_TestCase
+class ValidatePathTest extends TestCase
 {
 
     /**
@@ -55,7 +56,7 @@ class ValidatePathTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithInvalidPaths($path)
     {
-        $class  = $this->getMock("\Loom\File");
+        $class  = $this->createMock("\Loom\File");
         $method = new \ReflectionMethod($class, "validatePath");
         $method->setAccessible(true);
 
@@ -98,7 +99,7 @@ class ValidatePathTest extends \PHPUnit_Framework_TestCase
      */
     public function testWithValidPaths($path)
     {
-        $class  = $this->getMock("\Loom\File");
+        $class  = $this->createMock("\Loom\File");
         $method = new \ReflectionMethod($class, "validatePath");
         $method->setAccessible(true);
 

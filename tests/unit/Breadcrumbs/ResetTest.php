@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\Breadcrumbs;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for Breadcrumbs::reset()
@@ -14,7 +15,7 @@ namespace Loom\Tests\Unit\Breadcrumbs;
  * @version    2017-04-14
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class ResetTest extends \PHPUnit_Framework_TestCase
+class ResetTest extends TestCase
 {
 
 

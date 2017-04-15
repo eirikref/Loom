@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\File;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for File::__construct()
@@ -14,7 +15,7 @@ namespace Loom\Tests\Unit\File;
  * @version    2014-06-26
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class FromPathTest extends \PHPUnit_Framework_TestCase
+class FromPathTest extends TestCase
 {
 
     /**

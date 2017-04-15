@@ -48,9 +48,14 @@ class DataStore
         } else {
             echo "har ikke metoden";
         }
+
+        var_dump($this->catalog->has($ns));
+        var_dump($this->catalog->get($ns), $method);
         
+        print_pre_r($this->catalog);
         print_pre_r($ns);
         print_pre_r($method);
+        die();
         
         // check if query id exists
         // if so, call it, and return

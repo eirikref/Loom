@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\Settable;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for making sure Settable::get() behaves as
@@ -15,7 +16,7 @@ namespace Loom\Tests\Unit\Settable;
  * @version    2014-05-09
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class GetTest extends \PHPUnit_Framework_TestCase
+class GetTest extends TestCase
 {
 
     /**

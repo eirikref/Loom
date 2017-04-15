@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\Settable;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Loom: Unit tests for making sure Settable::set() behaves correctly
@@ -15,7 +16,7 @@ namespace Loom\Tests\Unit\Settable;
  * @version    2014-05-10
  * @author     Eirik Refsdal <eirikref@gmail.com>
  */
-class CheckTypeInvalidTypeTest extends \PHPUnit_Framework_TestCase
+class CheckTypeInvalidTypeTest extends TestCase
 {
 
     /**
@@ -58,7 +59,7 @@ class CheckTypeInvalidTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonStrings($type)
     {
-        $reflection = $this->getMock("\Loom\Settable");
+        $reflection = $this->createMock("\Loom\Settable");
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         
@@ -80,7 +81,7 @@ class CheckTypeInvalidTypeTest extends \PHPUnit_Framework_TestCase
      */
     public function testEmptyString()
     {
-        $reflection = $this->getMock("\Loom\Settable");
+        $reflection = $this->createMock("\Loom\Settable");
         $method = new \ReflectionMethod($reflection, "checkType");
         $method->setAccessible(true);
         
@@ -104,7 +105,7 @@ class CheckTypeInvalidTypeTest extends \PHPUnit_Framework_TestCase
     {
         $maxKeyLength = 128;
         $arg          = str_repeat("a", $maxKeyLength + 1);
-        $reflection   = $this->getMock("\Loom\Settable");
+        $reflection   = $this->createMock("\Loom\Settable");
         $method       = new \ReflectionMethod($reflection, "checkType");
 
         $method->setAccessible(true);

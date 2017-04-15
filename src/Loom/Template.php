@@ -5,24 +5,6 @@ namespace Loom;
 class Template
 {
 
-    // /**
-    //  * The singleton instance of this class
-    //  *
-    //  * @var    object $instance
-    //  * @access protected
-    //  */
-    // protected static $instance = null;
-
-    // public static function &getInstance()
-    // {
-    //     if (null === self::$instance) {
-    //         self::$instance = new Template();
-    //     }
-
-    //     return self::$instance;
-    // }
-
-    
     public function __construct(array $config)
     {
         if (!($this->validateConfig($config))) {
@@ -40,6 +22,8 @@ class Template
         ));
     }
 
+
+    
     private function validateConfig(array $config)
     {
         if (!(isset($config["templateDir"]))) {
@@ -74,6 +58,7 @@ class Template
     }
 
 
+    
     public function addPath($path)
     {
         $this->loader->addPath($path);
