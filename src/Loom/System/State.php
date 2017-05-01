@@ -17,6 +17,7 @@ class State
     protected $page;
     protected $user;
     protected $breadcrumbs;
+    protected $modelManager;
     protected $errorHandler;
     protected $errors = array();
 
@@ -175,6 +176,20 @@ class State
         return $this->breadcrumbs;
     }
 
+
+
+    public function setModelManager(\Loom\Model\ModelManager $mgr)
+    {
+        $this->modelManager = $mgr;
+    }
+
+
+    
+    public function &getModelManager()
+    {
+        return $this->modelManager;
+    }
+    
 
     
     public function isReady()

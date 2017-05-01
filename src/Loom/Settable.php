@@ -43,23 +43,7 @@ class Settable
      */
     private $maxKeyLength = 128;
 
-    /**
-     * Model
-     *
-     * @var    object $model
-     * @access protected
-     */
-    protected $model;
-
-    /**
-     * Valid fields
-     *
-     * @var    array $valid
-     * @access protected
-     */
-    protected $valid = array();
-
-
+    
 
     protected function validateKey($key)
     {
@@ -345,8 +329,7 @@ class Settable
 
 
 
-    // FIXME: Does not support multi-level checks
-    public function has($key)
+    public function has($key, $type = null)
     {
         if (false === $this->validateKey($key)) {
             return false;
@@ -355,20 +338,25 @@ class Settable
         $subkeys = explode($this->delimiter, $key);
         $last    = end($subkeys);
         $tmp     = $this->data;
+        $found   = null;
 
         foreach ($subkeys as $s) {
             if (is_array($tmp) && isset($tmp[$s])) {
 
                 if ($s == $last) {
-                    return true;
+                    $found = $tmp;
                 } else {
                     $tmp = $tmp[$s];
                 }
             } elseif (is_string($tmp) && $s == $tmp) {
-                return true;
+                $found = $tmp;
             }
         }
-        
-        return false;
+
+        if ($found && !$type || $found && $this->checkType($found, $type)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -26,42 +26,93 @@ class AdvancedClass
 {
 
     protected $data;
-    protected $dbh;
-    protected $mgr;
+    protected $store;
+    protected $modelMgr;
+    protected $model;
+
+
     
-    public function __construct($mgr = null, $dbh = null)
+    public function __construct(&$modelMgr = null, &$store = null)
     {
         $this->data = new \Loom\Settable();
-
-        if ($mgr instanceof \Loom\ModelManager) {
-            $this->mgr = $mgr;
+        
+        if ($modelMgr instanceof \Loom\Model\ModelManager) {
+            $this->modelMgr = $modelMgr;
         }
 
-        if ($dbh) {
-            $this->dbh = $dbh;
+        if ($store instanceof \Loom\DataStore) {
+            $this->store = $store;
         }
+
+        $this->initModel(get_class($this));
     }
 
-    public function setData()
+
+
+    protected function initModel($name)
     {
+        if ($this->modelMgr instanceof \Loom\Model\ModelManager && $this->modelMgr->has($name)) {
+            $this->model = $this->modelMgr->get($name);
+        } else {
+            print_pre_r($name);
+            error_log("Unable to find module $name");
+        }
     }
 
+    
+    public function setData(array $input)
+    {
+        foreach ($input as $field => $value) {
+            $this->set($field, $value);
+        }
+    }
+
+
+
+    public function set($id, $value)
+    {
+        if (!is_string($id)) {
+            return false;
+        }
+        
+        if ($this->model) {
+            $field = $this->model->getField($id);
+
+            if (!$field->validateValue($value)) {
+                return false;
+            }
+        }
+
+        return $this->data->set($id, $value);
+    }
+
+    
+    
     public function toJson()
     {
+        return $this->data->get();
     }
 
+
+    
     public function create()
     {
     }
 
+
+    
     public function read()
     {
     }
 
+
+    
     public function update()
     {
     }
 
+
+    
     public function delete()
     {
     }
