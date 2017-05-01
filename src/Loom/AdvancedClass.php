@@ -88,7 +88,7 @@ class AdvancedClass
 
     
     
-    public function toJson()
+    public function toApi()
     {
         return $this->data->get();
     }

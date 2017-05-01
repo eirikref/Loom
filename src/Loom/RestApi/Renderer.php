@@ -26,29 +26,14 @@ class Renderer
         http_response_code($resp->getHttpStatus());
         header("Content-Type: application/vnd.api+json");
         
-        // print_pre_r($resp->get());
-        // $modResp = $this->transform($resp->get());
         array_walk_recursive($data, function(&$item) {
             if ($item instanceof \Loom\AdvancedClass) {
-                // echo "hei!";
-                $tmp  = $item->toJson();
-                $item = $tmp;
+                $item = $item->toApi();
             }
         });
         
         $json = json_encode($data);
-        // print_pre_r($json);
         print $json;
-    }
-
-
-    
-    protected function transform(array $input)
-    {
-        $out = array();
-
-        return $out;
-        
     }
 
 }
