@@ -8,17 +8,23 @@ class DataStore
     private $backend;
     private $catalog;
 
+
+    
     public function __construct(\Loom\DataStore\StorageEngineInterface $backend)
     {
         $this->backend = $backend;
         $this->catalog = new \Loom\Settable();
     }
 
+
+    
     public function connect()
     {
         return $this->backend->connect();
     }
 
+
+    
     public function disconnect()
     {
         return $this->backend->disconnect();
@@ -46,21 +52,12 @@ class DataStore
         if ($this->catalog->has($ns) && method_exists($this->catalog->get($ns), $method)) {
             return $this->catalog->get($ns)->{$method}($payload);
         } else {
-            echo "har ikke metoden";
+            error_log("Invalid DataStore method: $ns::$method");
+            $this->getCatalog();
         }
-
-        var_dump($this->catalog->has($ns));
-        var_dump($this->catalog->get($ns), $method);
-        
-        print_pre_r($this->catalog);
-        print_pre_r($ns);
-        print_pre_r($method);
-        die();
-        
-        // check if query id exists
-        // if so, call it, and return
-        // if not, raise some form of error
     }
+
+
 
     private function preparePdo()
     {
@@ -75,9 +72,10 @@ class DataStore
         }
     }
 
+
+    
     public function queryBackend($query, array $args = null)
     {
         return $this->backend->query($query, $args);
-        // print_pre_r($tmp);
     }
 }

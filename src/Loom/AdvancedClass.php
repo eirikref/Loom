@@ -60,6 +60,7 @@ class AdvancedClass
     }
 
     
+    
     public function setData(array $input)
     {
         foreach ($input as $field => $value) {

@@ -49,17 +49,22 @@ class Mysql implements \Loom\DataStore\StorageEngineInterface
     }
 
 
+
     protected function resetError()
     {
         $this->error = array("code" => null,
                              "msg" => null);
     }
 
+
+
     public function getErrorCode()
     {
         return $this->error["code"];
     }
 
+
+    
     public function getErrorMsg()
     {
         if (isset($this->error["msg"][2])) {
@@ -67,6 +72,8 @@ class Mysql implements \Loom\DataStore\StorageEngineInterface
         }
     }
 
+
+    
     /**
      * Configure connection
      */
@@ -125,7 +132,7 @@ class Mysql implements \Loom\DataStore\StorageEngineInterface
     public function query($query, array $args = null)
     {
         $this->resetError();
-        
+
         if (!$this->dbh) {
             $this->error["msg"] = "No database connection";
             return false;
@@ -139,18 +146,25 @@ class Mysql implements \Loom\DataStore\StorageEngineInterface
             $this->error["code"] = $sth->errorCode();
             $this->error["msg"] = $sth->errorInfo();
 
+            print_pre_r($this->error);
+            // die();
+            
             return false;
         }
     }
 
 
+    
     public function getLastInsertId()
     {
         return $this->dbh->lastInsertId();
     }
 
+
+    
     public function isReady()
     {
         return $this->isReady;
     }
+
 }

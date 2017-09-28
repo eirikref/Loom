@@ -19,6 +19,8 @@ class Request
     protected $url;
     protected $method;
 
+
+    
     public function __construct($url = null)
     {
         if ($url) {
@@ -26,6 +28,8 @@ class Request
         }
     }
 
+
+    
     public function setUrl($url)
     {
         if ($url instanceof \Loom\Url) {
@@ -35,11 +39,15 @@ class Request
         }
     }
 
+
+    
     public function getUrl()
     {
         return $this->url;
     }
 
+
+    
     public function getPath()
     {
         if (isset($this->url)) {
@@ -47,6 +55,8 @@ class Request
         }
     }
 
+
+    
     public function getPathSize()
     {
         if (isset($this->url)) {
@@ -54,18 +64,25 @@ class Request
         }
     }
 
+
+    
     public function setMethod($method)
     {
         $this->method = $method;
     }
 
+
+    
     public function getMethod()
     {
         return $this->method;
     }
 
+
+    
     public function getParam($p)
     {
         return $this->url->getParam($p);
     }
+
 }

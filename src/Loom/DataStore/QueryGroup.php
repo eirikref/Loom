@@ -14,6 +14,7 @@ class QueryGroup
         $this->parent = $parent;
     }
 
+    
 
     protected function query($query, array $args = null)
     {
@@ -21,8 +22,11 @@ class QueryGroup
         return $this->parent->queryBackend($query, $args);
     }
 
+
+    
     protected function getParent()
     {
         return $this->parent;
     }
+
 }

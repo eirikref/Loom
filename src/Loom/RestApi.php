@@ -135,7 +135,6 @@ class RestApi
 
     public function &getResponse()
     {
-        // print_pre_r($this->response);
         return $this->response;
     }
 
