@@ -107,5 +107,4 @@ class Breadcrumbs
     {
         $this->data = array();
     }
-
 }

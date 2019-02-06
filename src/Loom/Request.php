@@ -84,5 +84,4 @@ class Request
     {
         return $this->url->getParam($p);
     }
-
 }

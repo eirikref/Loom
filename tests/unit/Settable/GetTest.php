@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\Settable;
+
 use PHPUnit\Framework\TestCase;
 
 /**

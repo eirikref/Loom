@@ -51,5 +51,4 @@ class Field
         // FIXME: To be implemented
         return true;
     }
-    
 }

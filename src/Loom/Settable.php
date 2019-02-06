@@ -342,7 +342,6 @@ class Settable
 
         foreach ($subkeys as $s) {
             if (is_array($tmp) && isset($tmp[$s])) {
-
                 if ($s == $last) {
                     $found = $tmp;
                 } else {

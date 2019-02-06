@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\File;
+
 use PHPUnit\Framework\TestCase;
 
 /**

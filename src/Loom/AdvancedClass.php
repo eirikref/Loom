@@ -16,7 +16,7 @@ namespace Loom;
  * Other than that:
  * - Supports a model
  * - Supports ORM-like functionality
- * - 
+ * -
  *
  * @package Loom
  * @version 2017-04-16
@@ -124,5 +124,4 @@ class AdvancedClass
     public function delete()
     {
     }
-
 }

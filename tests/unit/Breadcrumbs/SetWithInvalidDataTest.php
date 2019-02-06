@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\Breadcrumbs;
+
 use PHPUnit\Framework\TestCase;
 
 /**

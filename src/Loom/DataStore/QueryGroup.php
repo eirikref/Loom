@@ -28,5 +28,4 @@ class QueryGroup
     {
         return $this->parent;
     }
-
 }

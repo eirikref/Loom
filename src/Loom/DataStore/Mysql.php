@@ -166,5 +166,4 @@ class Mysql implements \Loom\DataStore\StorageEngineInterface
     {
         return $this->isReady;
     }
-
 }

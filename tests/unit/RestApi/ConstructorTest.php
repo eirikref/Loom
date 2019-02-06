@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\RestApi;
+
 use PHPUnit\Framework\TestCase;
 
 /**

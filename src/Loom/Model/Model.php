@@ -58,5 +58,4 @@ class Model
             return $this->fields[$id];
         }
     }
-    
 }

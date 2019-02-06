@@ -36,5 +36,4 @@ class ModelManager extends \Loom\GenericManager
 
         $this->setData($arr);
     }
-        
 }

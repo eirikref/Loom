@@ -5,6 +5,7 @@
  */
 
 namespace Loom\Tests\Unit\File;
+
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -36,7 +37,7 @@ class IsReadableTest extends TestCase
      * @access protected
      * @return void
      */
-    protected function setup()
+    protected function setUp(): void
     {
         $this->path = __DIR__ . "/somedir/file-with-permissions";
         
@@ -57,7 +58,7 @@ class IsReadableTest extends TestCase
      * @access protected
      * @return void
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unlink($this->path);
     }

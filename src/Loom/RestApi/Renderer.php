@@ -26,7 +26,7 @@ class Renderer
         http_response_code($resp->getHttpStatus());
         header("Content-Type: application/vnd.api+json");
         
-        array_walk_recursive($data, function(&$item) {
+        array_walk_recursive($data, function (&$item) {
             if ($item instanceof \Loom\AdvancedClass) {
                 $item = $item->toApi();
             }
@@ -35,5 +35,4 @@ class Renderer
         $json = json_encode($data);
         print $json;
     }
-
 }

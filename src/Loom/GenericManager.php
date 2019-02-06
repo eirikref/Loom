@@ -56,6 +56,4 @@ class GenericManager
     {
         return array_flip(array_keys($this->list));
     }
-    
 }
-

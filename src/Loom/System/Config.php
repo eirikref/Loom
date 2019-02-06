@@ -33,5 +33,4 @@ class Config extends \Loom\Settable
             $this->data = $data;
         }
     }
-
 }
