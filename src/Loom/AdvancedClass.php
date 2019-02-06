@@ -87,6 +87,13 @@ class AdvancedClass
         return $this->data->set($id, $value);
     }
 
+
+
+    public function get($id)
+    {
+        return $this->data->get($id);
+    }
+
     
     
     public function toApi()

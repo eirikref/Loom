@@ -78,4 +78,30 @@ class DataStore
     {
         return $this->backend->query($query, $args);
     }
+
+
+    
+    public function getCatalog()
+    {
+        $ret = array();
+
+        foreach ($this->catalog->get() as $id => $c) {
+            $list = get_class_methods($c);
+        }
+    }
+
+
+    
+    // public function getErrorCode()
+    // {
+    //     return 0;
+    // }
+
+
+
+    // public function getErrorMsg()
+    // {
+    //     return "Not implemented yet";
+    // }
+    
 }

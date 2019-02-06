@@ -65,6 +65,13 @@ class Response
     }
 
 
+
+    public function getData()
+    {
+        return $this->data->get();
+    }
+    
+
     
     public function setError($key, $val)
     {
